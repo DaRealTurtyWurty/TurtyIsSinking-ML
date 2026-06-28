@@ -2,7 +2,7 @@ package dev.turtywurty.turtyissinking.platform;
 
 import dev.turtywurty.turtyissinking.Constants;
 import dev.turtywurty.turtyissinking.platform.services.IRegistryHelper;
-import dev.turtywurty.turtyissinking.platform.services.RegistryHandle;
+import dev.turtywurty.turtyissinking.platform.services.util.RegistryHandle;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;

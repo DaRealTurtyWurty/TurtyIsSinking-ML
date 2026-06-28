@@ -2,7 +2,7 @@ package dev.turtywurty.turtyissinking.init;
 
 import dev.turtywurty.turtyissinking.Constants;
 import dev.turtywurty.turtyissinking.platform.Services;
-import dev.turtywurty.turtyissinking.platform.services.RegistryHandle;
+import dev.turtywurty.turtyissinking.platform.services.util.RegistryHandle;
 import net.minecraft.sounds.SoundEvent;
 
 public final class ModSounds {

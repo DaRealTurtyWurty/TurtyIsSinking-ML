@@ -1,4 +1,4 @@
-package dev.turtywurty.turtyissinking.platform.services;
+package dev.turtywurty.turtyissinking.platform.services.util;
 
 import net.minecraft.resources.Identifier;
 
