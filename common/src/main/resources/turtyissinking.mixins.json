@@ -7,10 +7,14 @@
     "AnimalMixin",
     "CakeBlockMixin",
     "ItemMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "ZombieMixin"
   ],
   "client": [
-    "ClientPacketListenerMixin"
+    "AbstractZombieRendererMixin",
+    "AnimationUtilsMixin",
+    "ClientPacketListenerMixin",
+    "UndeadRenderStateMixin"
   ],
   "server": [],
   "injectors": {
