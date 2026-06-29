@@ -12,7 +12,9 @@ public final class ModSounds {
     public static final RegistryHandle<SoundEvent> THUNDER = Services.REGISTRY.registerSoundEvent("thunder",
             () -> SoundEvent.createVariableRangeEvent(Constants.id("thunder")));
 
-    public static void load() {
+    public static final RegistryHandle<SoundEvent> FART = Services.REGISTRY.registerSoundEvent("fart",
+            () -> SoundEvent.createVariableRangeEvent(Constants.id("fart")));
 
+    public static void load() {
     }
 }

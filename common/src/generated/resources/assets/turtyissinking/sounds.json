@@ -1,4 +1,16 @@
 {
+  "fart": {
+    "sounds": [
+      "turtyissinking:266450__ezcah__chair-fart",
+      "turtyissinking:402569__teddyferguson__fart",
+      "turtyissinking:610067__teddyferguson__fart",
+      "turtyissinking:640803__dsisstudios__trumpet-fart",
+      "turtyissinking:645339__samsterbirdies__nasty-fart",
+      "turtyissinking:777448__frenkfurth__wav-fart-vegan-086",
+      "turtyissinking:833105__crimsonblaze__funny-fart"
+    ],
+    "subtitle": "subtitle.turtyissinking.fart"
+  },
   "thunder": {
     "sounds": [
       "turtyissinking:thunder"

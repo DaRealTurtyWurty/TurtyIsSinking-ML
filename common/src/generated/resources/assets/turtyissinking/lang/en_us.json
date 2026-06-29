@@ -1,4 +1,7 @@
 {
+  "effect.turtyissinking.lactose_intolerance": "Lactose Intolerance",
+  "entity.turtyissinking.poop_projectile": "Poop Projectile",
+  "item.turtyissinking.poop": "Poop",
   "message.turtyissinking.age_verification.required": "You must verify your age to perform this action.",
   "screen.turtyissinking.age_verification.button.over_18": "I am over 18",
   "screen.turtyissinking.age_verification.button.under_18": "I am under 18",

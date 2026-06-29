@@ -16,7 +16,10 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "dev.turtywurty.turtyissinking.TurtyIsSinking"
+          "dev.turtywurty.turtyissinking.TurtyIsSinkingFabric"
+        ],
+        "client": [
+          "dev.turtywurty.turtyissinking.TurtyIsSinkingFabricClient"
         ]
     },
     "mixins": [

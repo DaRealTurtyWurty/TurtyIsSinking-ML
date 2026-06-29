@@ -2,10 +2,10 @@ package dev.turtywurty.turtyissinking;
 
 import net.fabricmc.api.ModInitializer;
 
-public class TurtyIsSinking implements ModInitializer {
+public class TurtyIsSinkingFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-        CommonClass.init();
+        TurtyIsSinkingCommon.init();
 
         FabricNetworking.registerPackets();
         FabricNetworking.registerPacketReceivers();

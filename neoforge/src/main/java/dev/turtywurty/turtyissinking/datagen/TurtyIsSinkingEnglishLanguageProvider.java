@@ -1,6 +1,9 @@
 package dev.turtywurty.turtyissinking.datagen;
 
 import dev.turtywurty.turtyissinking.Constants;
+import dev.turtywurty.turtyissinking.init.ModEntityTypes;
+import dev.turtywurty.turtyissinking.init.ModItems;
+import dev.turtywurty.turtyissinking.init.ModMobEffects;
 import dev.turtywurty.turtyissinking.screen.AgeVerificationScreen;
 import dev.turtywurty.turtyissinking.util.PlayerAgeVerification;
 import net.minecraft.data.PackOutput;
@@ -19,6 +22,13 @@ public class TurtyIsSinkingEnglishLanguageProvider extends LanguageProvider {
         add(AgeVerificationScreen.I_AM_OVER_18_BUTTON, "I am over 18");
         add(AgeVerificationScreen.I_AM_UNDER_18_BUTTON, "I am under 18");
         add(PlayerAgeVerification.AGE_VERIFICATION_REQUIRED_MESSAGE, "You must verify your age to perform this action.");
+        add(ModMobEffects.LACTOSE_INTOLERANCE.get().value().getDescriptionId(), "Lactose Intolerance");
+        add(ModItems.POOP.get(), "Poop");
+        add(ModEntityTypes.POOP_PROJECTILE.get(), "Poop Projectile");
+        add(ModMobEffects.LACTOSE_INTOLERANCE.get().value(), "Lactose Intolerance");
+        add(ModMobEffects.FLATULENCE.get().value(), "Flatulence");
+        add(TurtyIsSinkingSoundDefinitionProvider.THUNDER_SUBTITLE, "Thunder (by Imagine Dragons)");
+        add(TurtyIsSinkingSoundDefinitionProvider.FART_SUBTITLE, "Fart");
     }
 
     private void add(Component component, String translation) {
