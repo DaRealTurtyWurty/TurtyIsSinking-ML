@@ -6,7 +6,10 @@
   "mixins": [
     "AnimalMixin",
     "CakeBlockMixin",
+    "IronGolemMixin",
     "ItemMixin",
+    "LivingEntityMixin",
+    "MobMixin",
     "PlayerMixin",
     "ZombieMixin"
   ],
