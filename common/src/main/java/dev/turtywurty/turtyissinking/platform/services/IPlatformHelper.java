@@ -2,6 +2,8 @@ package dev.turtywurty.turtyissinking.platform.services;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 
 public interface IPlatformHelper {
     /**
@@ -50,4 +52,6 @@ public interface IPlatformHelper {
     default boolean setNoseSnipped(Villager villager, boolean value) {
         return value;
     }
+
+    boolean isAllergic(Player player, Item item);
 }

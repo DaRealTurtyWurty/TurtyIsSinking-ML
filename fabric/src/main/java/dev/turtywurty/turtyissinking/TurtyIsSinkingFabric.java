@@ -1,5 +1,6 @@
 package dev.turtywurty.turtyissinking;
 
+import dev.turtywurty.turtyissinking.init.FabricAttachments;
 import net.fabricmc.api.ModInitializer;
 
 public class TurtyIsSinkingFabric implements ModInitializer {
@@ -9,5 +10,7 @@ public class TurtyIsSinkingFabric implements ModInitializer {
 
         FabricNetworking.registerPackets();
         FabricNetworking.registerPacketReceivers();
+
+        FabricAttachments.load();
     }
 }
