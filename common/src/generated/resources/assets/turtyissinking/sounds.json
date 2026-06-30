@@ -1,4 +1,10 @@
 {
+  "baby_zombie_six_seven": {
+    "sounds": [
+      "turtyissinking:baby_zombie_six_seven"
+    ],
+    "subtitle": "subtitle.turtyissinking.baby_zombie_six_seven"
+  },
   "fart": {
     "sounds": [
       "turtyissinking:266450__ezcah__chair-fart",

@@ -19,6 +19,8 @@ public class NeoForgeEvents {
     public static void registerPayloads(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1").executesOn(HandlerThread.NETWORK);
 
+        registrar.playToClient(ClientboundOpenAgeVerificationScreenPacket.TYPE, ClientboundOpenAgeVerificationScreenPacket.CODEC);
+
         registrar.playToServer(ServerboundAgeVerificationPacket.TYPE, ServerboundAgeVerificationPacket.CODEC, (payload, context) -> {
             Player player = context.player();
             if (player instanceof PlayerAgeVerification ageVerification) {

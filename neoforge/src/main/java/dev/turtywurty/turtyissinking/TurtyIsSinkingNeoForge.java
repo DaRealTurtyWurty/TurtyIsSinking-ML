@@ -1,6 +1,7 @@
 package dev.turtywurty.turtyissinking;
 
 import dev.turtywurty.turtyissinking.platform.NeoForgeRegistryHelper;
+import dev.turtywurty.turtyissinking.init.NeoForgeAttachments;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 
@@ -10,5 +11,6 @@ public class TurtyIsSinkingNeoForge {
         TurtyIsSinkingCommon.init();
         eventBus.addListener(TurtyIsSinkingDatagen::onGatherClientData);
         NeoForgeRegistryHelper.load(eventBus);
+        NeoForgeAttachments.load(eventBus);
     }
 }

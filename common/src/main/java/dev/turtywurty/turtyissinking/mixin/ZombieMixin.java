@@ -1,10 +1,8 @@
 package dev.turtywurty.turtyissinking.mixin;
 
 import dev.turtywurty.turtyissinking.entity.Zombie67Goal;
+import dev.turtywurty.turtyissinking.platform.Services;
 import dev.turtywurty.turtyissinking.util.Zombie67;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.world.entity.monster.Monster;
@@ -19,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Zombie.class)
 public class ZombieMixin extends Monster implements Zombie67 {
     @Unique
-    private static final EntityDataAccessor<Boolean> turtyissinking$IS_67ING = SynchedEntityData.defineId(Zombie.class, EntityDataSerializers.BOOLEAN);
+    private boolean turtyissinking$is67ing;
 
     protected ZombieMixin(EntityType<? extends Monster> type, Level level) {
         super(type, level);
@@ -27,20 +25,12 @@ public class ZombieMixin extends Monster implements Zombie67 {
 
     @Override
     public boolean turtyissinking$is67ing() {
-        return this.entityData.get(turtyissinking$IS_67ING);
+        return Services.PLATFORM.getZombie67ing((Zombie) (Object) this, this.turtyissinking$is67ing);
     }
 
     @Override
     public void turtyissinking$set67ing(boolean is67ing) {
-        this.entityData.set(turtyissinking$IS_67ING, is67ing);
-    }
-
-    @Inject(
-            method = "defineSynchedData",
-            at = @At("TAIL")
-    )
-    private void turtyissinking$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo callbackInfo) {
-        builder.define(turtyissinking$IS_67ING, false);
+        this.turtyissinking$is67ing = Services.PLATFORM.setZombie67ing((Zombie) (Object) this, is67ing);
     }
 
     @Inject(

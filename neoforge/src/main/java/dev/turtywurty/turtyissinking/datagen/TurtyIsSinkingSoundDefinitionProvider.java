@@ -9,6 +9,7 @@ import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 public class TurtyIsSinkingSoundDefinitionProvider extends SoundDefinitionsProvider {
     public static final String THUNDER_SUBTITLE = "subtitle." + Constants.MOD_ID + ".thunder";
     public static final String FART_SUBTITLE = "subtitle." + Constants.MOD_ID + ".fart";
+    public static final String BABY_ZOMBIE_SIX_SEVEN_SUBTITLE = "subtitle." + Constants.MOD_ID + ".baby_zombie_six_seven";
 
     public TurtyIsSinkingSoundDefinitionProvider(PackOutput output) {
         super(output, Constants.MOD_ID);
@@ -47,5 +48,12 @@ public class TurtyIsSinkingSoundDefinitionProvider extends SoundDefinitionsProvi
                         SoundDefinition.Sound.sound(
                                 Constants.id("833105__crimsonblaze__funny-fart"),
                                 SoundDefinition.SoundType.SOUND)));
+
+        add(ModSounds.BABY_ZOMBIE_SIX_SEVEN.get(), SoundDefinition.definition()
+                .subtitle(BABY_ZOMBIE_SIX_SEVEN_SUBTITLE)
+                .with(SoundDefinition.Sound.sound(
+                        Constants.id("baby_zombie_six_seven"),
+                        SoundDefinition.SoundType.SOUND)
+                ));
     }
 }

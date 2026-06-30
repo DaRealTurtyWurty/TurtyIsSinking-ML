@@ -25,10 +25,10 @@ public class TurtyIsSinkingEnglishLanguageProvider extends LanguageProvider {
         add(ModMobEffects.LACTOSE_INTOLERANCE.get().value().getDescriptionId(), "Lactose Intolerance");
         add(ModItems.POOP.get(), "Poop");
         add(ModEntityTypes.POOP_PROJECTILE.get(), "Poop Projectile");
-        add(ModMobEffects.LACTOSE_INTOLERANCE.get().value(), "Lactose Intolerance");
         add(ModMobEffects.FLATULENCE.get().value(), "Flatulence");
         add(TurtyIsSinkingSoundDefinitionProvider.THUNDER_SUBTITLE, "Thunder (by Imagine Dragons)");
         add(TurtyIsSinkingSoundDefinitionProvider.FART_SUBTITLE, "Fart");
+        add(TurtyIsSinkingSoundDefinitionProvider.BABY_ZOMBIE_SIX_SEVEN_SUBTITLE, "Baby Zombie 67");
     }
 
     private void add(Component component, String translation) {

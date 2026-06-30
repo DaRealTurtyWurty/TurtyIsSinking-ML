@@ -1,5 +1,7 @@
 package dev.turtywurty.turtyissinking.platform.services;
 
+import net.minecraft.world.entity.Entity;
+
 public interface IPlatformHelper {
     /**
      * Gets the name of the current platform
@@ -30,5 +32,13 @@ public interface IPlatformHelper {
      */
     default String getEnvironmentName() {
         return isDevelopmentEnvironment() ? "development" : "production";
+    }
+
+    default boolean getZombie67ing(Entity entity, boolean fallback) {
+        return fallback;
+    }
+
+    default boolean setZombie67ing(Entity entity, boolean value) {
+        return value;
     }
 }

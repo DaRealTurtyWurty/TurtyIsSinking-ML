@@ -15,6 +15,9 @@ public final class ModSounds {
     public static final RegistryHandle<SoundEvent> FART = Services.REGISTRY.registerSoundEvent("fart",
             () -> SoundEvent.createVariableRangeEvent(Constants.id("fart")));
 
+    public static final RegistryHandle<SoundEvent> BABY_ZOMBIE_SIX_SEVEN = Services.REGISTRY.registerSoundEvent("baby_zombie_six_seven",
+            () -> SoundEvent.createVariableRangeEvent(Constants.id("baby_zombie_six_seven")));
+
     public static void load() {
     }
 }

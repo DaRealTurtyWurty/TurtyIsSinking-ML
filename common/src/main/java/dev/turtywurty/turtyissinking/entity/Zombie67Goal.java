@@ -1,6 +1,8 @@
 package dev.turtywurty.turtyissinking.entity;
 
+import dev.turtywurty.turtyissinking.init.ModSounds;
 import dev.turtywurty.turtyissinking.util.Zombie67;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
@@ -86,6 +88,7 @@ public class Zombie67Goal extends ZombieAttackGoal {
             this.mob.getNavigation().stop();
             this.phase = Phase.STARING;
             this.stareTicks = STARE_TICKS;
+            this.mob.level().playSound(null, this.mob, ModSounds.BABY_ZOMBIE_SIX_SEVEN.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
             return;
         }
 
