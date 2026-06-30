@@ -24,7 +24,7 @@ public class GamemodeCriterion extends SimpleCriterionTrigger<GamemodeCriterion.
     public record Conditions(
             Optional<ContextAwarePredicate> playerPredicate,
             GameType gameMode) implements SimpleCriterionTrigger.SimpleInstance {
-        public static Codec<GamemodeCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        public static final Codec<GamemodeCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 ContextAwarePredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::playerPredicate),
                 GameType.CODEC.fieldOf("gamemode").forGetter(Conditions::gameMode)
         ).apply(instance, Conditions::new));

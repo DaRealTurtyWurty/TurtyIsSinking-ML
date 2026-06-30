@@ -31,6 +31,8 @@ public class TurtyIsSinkingEnglishLanguageProvider extends LanguageProvider {
         add(TurtyIsSinkingSoundDefinitionProvider.BABY_ZOMBIE_SIX_SEVEN_SUBTITLE, "Baby Zombie 67");
         add(TurtyIsSinkingAdvancementProvider.PIRACY_ITS_A_CRIME_TITLE, "Piracy, It's a Crime");
         add(TurtyIsSinkingAdvancementProvider.PIRACY_ITS_A_CRIME_DESCRIPTION, "Obtain a music disc in Creative Mode");
+        add(TurtyIsSinkingAdvancementProvider.PUNCH_OBSIDIAN_TITLE, "Are you happy now you sick fuck?");
+        add(TurtyIsSinkingAdvancementProvider.PUNCH_OBSIDIAN_DESCRIPTION, "Punch obsidian, therefore turning it into crying obsidian");
     }
 
     private void add(Component component, String translation) {

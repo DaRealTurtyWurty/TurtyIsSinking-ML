@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "punched_obsidian": {
+      "conditions": {
+        "block": {
+          "blocks": "minecraft:obsidian"
+        }
+      },
+      "trigger": "turtyissinking:punch_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.turtyissinking.punched_obsidian.description"
+    },
+    "hidden": true,
+    "icon": {
+      "id": "minecraft:crying_obsidian"
+    },
+    "title": {
+      "translate": "advancements.turtyissinking.punched_obsidian.title"
+    }
+  },
+  "requirements": [
+    [
+      "punched_obsidian"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

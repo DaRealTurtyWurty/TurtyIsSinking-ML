@@ -18,6 +18,7 @@
     "AbstractZombieRendererMixin",
     "AnimationUtilsMixin",
     "ClientPacketListenerMixin",
+    "ServerPlayerGameModeMixin",
     "UndeadRenderStateMixin"
   ],
   "server": [],

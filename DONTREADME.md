@@ -6,3 +6,4 @@ What's in the mod:
 - Iron Golems now climb walls
 - Diamond -> Netherite smithing
 - If you get music discs from the creative inventory, you get the achievement "Piracy. It's a crime."
+- If you punch obsidian, it turns into crying obsidian
