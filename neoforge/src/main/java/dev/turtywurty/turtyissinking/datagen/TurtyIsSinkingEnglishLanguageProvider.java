@@ -33,6 +33,7 @@ public class TurtyIsSinkingEnglishLanguageProvider extends LanguageProvider {
         add(TurtyIsSinkingAdvancementProvider.PIRACY_ITS_A_CRIME_DESCRIPTION, "Obtain a music disc in Creative Mode");
         add(TurtyIsSinkingAdvancementProvider.PUNCH_OBSIDIAN_TITLE, "Are you happy now you sick fuck?");
         add(TurtyIsSinkingAdvancementProvider.PUNCH_OBSIDIAN_DESCRIPTION, "Punch obsidian, therefore turning it into crying obsidian");
+        add(ModItems.VILLAGER_NOSE.get(), "Villager's Nose");
     }
 
     private void add(Component component, String translation) {

@@ -1,6 +1,7 @@
 package dev.turtywurty.turtyissinking.platform.services;
 
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.npc.villager.Villager;
 
 public interface IPlatformHelper {
     /**
@@ -39,6 +40,14 @@ public interface IPlatformHelper {
     }
 
     default boolean setZombie67ing(Entity entity, boolean value) {
+        return value;
+    }
+
+    default boolean hasNoseSnipped(Villager villager, boolean fallback) {
+        return fallback;
+    }
+
+    default boolean setNoseSnipped(Villager villager, boolean value) {
         return value;
     }
 }

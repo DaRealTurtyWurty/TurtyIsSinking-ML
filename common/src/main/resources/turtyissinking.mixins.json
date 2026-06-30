@@ -12,6 +12,7 @@
     "MobMixin",
     "PlayerMixin",
     "ServerPlayerMixin",
+    "VillagerMixin",
     "ZombieMixin"
   ],
   "client": [
@@ -19,7 +20,10 @@
     "AnimationUtilsMixin",
     "ClientPacketListenerMixin",
     "ServerPlayerGameModeMixin",
-    "UndeadRenderStateMixin"
+    "UndeadRenderStateMixin",
+    "VillagerModelMixin",
+    "VillagerRendererMixin",
+    "VillagerRenderStateMixin"
   ],
   "server": [],
   "injectors": {

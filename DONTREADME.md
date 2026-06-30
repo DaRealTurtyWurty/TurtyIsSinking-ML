@@ -7,3 +7,4 @@ What's in the mod:
 - Diamond -> Netherite smithing
 - If you get music discs from the creative inventory, you get the achievement "Piracy. It's a crime."
 - If you punch obsidian, it turns into crying obsidian
+- You can now shear villager's noses, eat them, and wear them

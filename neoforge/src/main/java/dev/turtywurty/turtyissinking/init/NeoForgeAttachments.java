@@ -17,6 +17,11 @@ public final class NeoForgeAttachments {
                     .sync(ByteBufCodecs.BOOL)
                     .build());
 
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> VILLAGER_NOSE_SNIPPED =
+            ATTACHMENT_TYPES.register("villager_nose_snipped", () -> AttachmentType.builder(() -> false)
+                    .sync(ByteBufCodecs.BOOL)
+                    .build());
+
     private NeoForgeAttachments() {
     }
 
