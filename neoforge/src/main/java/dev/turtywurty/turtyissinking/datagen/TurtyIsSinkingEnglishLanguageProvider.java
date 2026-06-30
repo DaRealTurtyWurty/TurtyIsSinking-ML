@@ -29,6 +29,8 @@ public class TurtyIsSinkingEnglishLanguageProvider extends LanguageProvider {
         add(TurtyIsSinkingSoundDefinitionProvider.THUNDER_SUBTITLE, "Thunder (by Imagine Dragons)");
         add(TurtyIsSinkingSoundDefinitionProvider.FART_SUBTITLE, "Fart");
         add(TurtyIsSinkingSoundDefinitionProvider.BABY_ZOMBIE_SIX_SEVEN_SUBTITLE, "Baby Zombie 67");
+        add(TurtyIsSinkingAdvancementProvider.PIRACY_ITS_A_CRIME_TITLE, "Piracy, It's a Crime");
+        add(TurtyIsSinkingAdvancementProvider.PIRACY_ITS_A_CRIME_DESCRIPTION, "Obtain a music disc in Creative Mode");
     }
 
     private void add(Component component, String translation) {

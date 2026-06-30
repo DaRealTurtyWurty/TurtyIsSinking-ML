@@ -1,0 +1,41 @@
+{
+  "criteria": {
+    "has_music_disc": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:music_discs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "is_creative": {
+      "conditions": {
+        "gamemode": "creative"
+      },
+      "trigger": "turtyissinking:gamemode"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.turtyissinking.piracy_its_a_crime.description"
+    },
+    "hidden": true,
+    "icon": {
+      "id": "minecraft:music_disc_chirp"
+    },
+    "title": {
+      "translate": "advancements.turtyissinking.piracy_its_a_crime.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_music_disc"
+    ],
+    [
+      "is_creative"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

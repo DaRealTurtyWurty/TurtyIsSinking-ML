@@ -3,8 +3,10 @@ package dev.turtywurty.turtyissinking.platform;
 import dev.turtywurty.turtyissinking.Constants;
 import dev.turtywurty.turtyissinking.platform.services.IRegistryHelper;
 import dev.turtywurty.turtyissinking.platform.services.util.RegistryHandle;
+import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
@@ -24,12 +26,14 @@ public final class NeoForgeRegistryHelper implements IRegistryHelper {
     private static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, Constants.MOD_ID);
     private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Constants.MOD_ID);
     private static final DeferredRegister.Entities ENTITIES = DeferredRegister.createEntities(Constants.MOD_ID);
+    private static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES = DeferredRegister.create(Registries.TRIGGER_TYPE, Constants.MOD_ID);
 
     public static void load(IEventBus bus) {
         SOUND_EVENTS.register(bus);
         MOB_EFFECTS.register(bus);
         ITEMS.register(bus);
         ENTITIES.register(bus);
+        TRIGGER_TYPES.register(bus);
     }
 
     @Override
@@ -96,6 +100,23 @@ public final class NeoForgeRegistryHelper implements IRegistryHelper {
 
             @Override
             public EntityType<T> get() {
+                return registered.get();
+            }
+        };
+    }
+
+    @Override
+    public <T extends CriterionTrigger<?>> RegistryHandle<T> registerCriteriaTrigger(String name, Supplier<T> trigger) {
+        Identifier id = Constants.id(name);
+        DeferredHolder<CriterionTrigger<?>, T> registered = TRIGGER_TYPES.register(id.getPath(), trigger);
+        return new RegistryHandle<>() {
+            @Override
+            public Identifier id() {
+                return id;
+            }
+
+            @Override
+            public T get() {
                 return registered.get();
             }
         };

@@ -13,5 +13,6 @@ public final class TurtyIsSinkingDatagen {
         event.createProvider(TurtyIsSinkingItemTagsProvider::new);
         event.createProvider(TurtyIsSinkingModelProvider::new);
         event.createProvider(TurtyIsSinkingRecipeProvider::new);
+        event.createProvider(TurtyIsSinkingAdvancementProvider::new);
     }
 }

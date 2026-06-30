@@ -5,3 +5,4 @@ What's in the mod:
 - When a baby zombie approaches the player, instead of attacking, it will do the 67 and then run away
 - Iron Golems now climb walls
 - Diamond -> Netherite smithing
+- If you get music discs from the creative inventory, you get the achievement "Piracy. It's a crime."

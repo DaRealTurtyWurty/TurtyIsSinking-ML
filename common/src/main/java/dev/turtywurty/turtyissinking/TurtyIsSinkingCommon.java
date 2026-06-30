@@ -1,9 +1,6 @@
 package dev.turtywurty.turtyissinking;
 
-import dev.turtywurty.turtyissinking.init.ModMobEffects;
-import dev.turtywurty.turtyissinking.init.ModEntityTypes;
-import dev.turtywurty.turtyissinking.init.ModItems;
-import dev.turtywurty.turtyissinking.init.ModSounds;
+import dev.turtywurty.turtyissinking.init.*;
 
 public class TurtyIsSinkingCommon {
     public static void init() {
@@ -11,5 +8,6 @@ public class TurtyIsSinkingCommon {
         ModMobEffects.load();
         ModItems.load();
         ModEntityTypes.load();
+        ModCriteria.load();
     }
 }

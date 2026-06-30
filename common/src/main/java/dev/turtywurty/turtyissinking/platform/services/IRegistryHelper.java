@@ -2,6 +2,7 @@ package dev.turtywurty.turtyissinking.platform.services;
 
 import dev.turtywurty.turtyissinking.Constants;
 import dev.turtywurty.turtyissinking.platform.services.util.RegistryHandle;
+import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -22,6 +23,8 @@ public interface IRegistryHelper {
     <T extends Item> RegistryHandle<T> registerItem(String name, Function<Item.Properties, T> item);
 
     <T extends Entity> RegistryHandle<EntityType<T>> registerEntityType(String name, EntityType.Builder<T> entityBuilder);
+
+    <T extends CriterionTrigger<?>> RegistryHandle<T> registerCriteriaTrigger(String name, Supplier<T> trigger);
 
     static ResourceKey<Item> createItemKey(String name) {
         return ResourceKey.create(Registries.ITEM, Constants.id(name));
