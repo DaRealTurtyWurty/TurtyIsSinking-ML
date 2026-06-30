@@ -1,9 +1,6 @@
 package dev.turtywurty.turtyissinking;
 
-import dev.turtywurty.turtyissinking.datagen.TurtyIsSinkingEnglishLanguageProvider;
-import dev.turtywurty.turtyissinking.datagen.TurtyIsSinkingItemTagsProvider;
-import dev.turtywurty.turtyissinking.datagen.TurtyIsSinkingModelProvider;
-import dev.turtywurty.turtyissinking.datagen.TurtyIsSinkingSoundDefinitionProvider;
+import dev.turtywurty.turtyissinking.datagen.*;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 public final class TurtyIsSinkingDatagen {
@@ -15,5 +12,6 @@ public final class TurtyIsSinkingDatagen {
         event.createProvider(TurtyIsSinkingEnglishLanguageProvider::new);
         event.createProvider(TurtyIsSinkingItemTagsProvider::new);
         event.createProvider(TurtyIsSinkingModelProvider::new);
+        event.createProvider(TurtyIsSinkingRecipeProvider::new);
     }
 }
