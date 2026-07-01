@@ -1,8 +1,10 @@
 package dev.turtywurty.turtyissinking;
 
 import dev.turtywurty.turtyissinking.network.ClientboundOpenAgeVerificationScreenPacket;
+import dev.turtywurty.turtyissinking.network.ClientboundReverseJukeboxPacket;
 import dev.turtywurty.turtyissinking.network.ServerboundAgeVerificationPacket;
 import dev.turtywurty.turtyissinking.screen.AgeVerificationScreen;
+import dev.turtywurty.turtyissinking.sound.ReversedJukeboxTracker;
 import dev.turtywurty.turtyissinking.util.PlayerAgeVerification;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
@@ -20,6 +22,7 @@ public class NeoForgeEvents {
         PayloadRegistrar registrar = event.registrar("1").executesOn(HandlerThread.NETWORK);
 
         registrar.playToClient(ClientboundOpenAgeVerificationScreenPacket.TYPE, ClientboundOpenAgeVerificationScreenPacket.CODEC);
+        registrar.playToClient(ClientboundReverseJukeboxPacket.TYPE, ClientboundReverseJukeboxPacket.CODEC);
 
         registrar.playToServer(ServerboundAgeVerificationPacket.TYPE, ServerboundAgeVerificationPacket.CODEC, (payload, context) -> {
             Player player = context.player();
@@ -33,5 +36,8 @@ public class NeoForgeEvents {
     public static void registerPayloads(RegisterClientPayloadHandlersEvent event) {
         event.register(ClientboundOpenAgeVerificationScreenPacket.TYPE,
                 (_, context) -> context.enqueueWork(() -> Minecraft.getInstance().setScreenAndShow(new AgeVerificationScreen())));
+
+        event.register(ClientboundReverseJukeboxPacket.TYPE,
+                (payload, context) -> context.enqueueWork(() -> ReversedJukeboxTracker.setReversed(payload.pos(), payload.reversed())));
     }
 }

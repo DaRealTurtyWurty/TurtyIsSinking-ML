@@ -8,6 +8,7 @@
     "CakeBlockMixin",
     "IronGolemMixin",
     "ItemMixin",
+    "JukeboxBlockEntityMixin",
     "LivingEntityMixin",
     "MobMixin",
     "PlayerMixin",
@@ -19,7 +20,9 @@
     "AbstractZombieRendererMixin",
     "AnimationUtilsMixin",
     "ClientPacketListenerMixin",
+    "LevelEventHandlerMixin",
     "ServerPlayerGameModeMixin",
+    "SoundEngineMixin",
     "UndeadRenderStateMixin",
     "VillagerModelMixin",
     "VillagerRendererMixin",
@@ -33,4 +36,3 @@
     "requireAnnotations": true
   }
 }
-
