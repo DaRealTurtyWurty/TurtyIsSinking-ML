@@ -35,6 +35,10 @@ public class SoundEngineMixin {
         if (!(instance instanceof ReversedSoundInstance))
             return streamFuture;
 
+        return turtyissinking$reverse(streamFuture);
+    }
+
+    private CompletableFuture<AudioStream> turtyissinking$reverse(CompletableFuture<AudioStream> streamFuture) {
         return streamFuture.thenApply(stream -> {
             if (!(stream instanceof FiniteAudioStream finiteAudioStream))
                 return stream;

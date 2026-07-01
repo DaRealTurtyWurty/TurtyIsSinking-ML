@@ -10,3 +10,4 @@ What's in the mod:
 - You can now shear villager's noses, eat them, and wear them
 - Dinnerbone music discs
 - You can only eat potatoes if you're in ireland
+- No littering

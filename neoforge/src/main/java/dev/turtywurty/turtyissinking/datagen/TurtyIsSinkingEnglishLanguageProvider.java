@@ -36,6 +36,7 @@ public class TurtyIsSinkingEnglishLanguageProvider extends LanguageProvider {
         add(TurtyIsSinkingAdvancementProvider.PUNCH_OBSIDIAN_DESCRIPTION, "Punch obsidian, therefore turning it into crying obsidian");
         add(ModItems.VILLAGER_NOSE.get(), "Villager's Nose");
         add(AllergyUtils.ALLERGY_MESSAGE, "You are having an allergic reaction!");
+        add("message.turtyissinking.no_littering", "No littering!");
     }
 
     private void add(Component component, String translation) {

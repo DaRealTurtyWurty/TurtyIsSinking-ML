@@ -6,9 +6,11 @@
   "mixins": [
     "CriteriaTriggersAccessor",
     "FabricVillagerMixin",
+    "JukeboxBlockEntityMixin",
     "FabricZombieMixin"
   ],
   "client": [
+    "SoundEngineMixin"
   ],
   "server": [],
   "injectors": {
