@@ -8,16 +8,20 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 public final class AllergyUtils {
     public static final Component ALLERGY_MESSAGE = Component.translatable(Constants.MOD_ID + ".allergy.message");
@@ -41,13 +45,44 @@ public final class AllergyUtils {
     }
 
     public static @NonNull Map<Identifier, Boolean> getDefaultAllergyFoods() {
-        // 1 in 10 chance for each food item to be allergic
-        return BuiltInRegistries.ITEM.stream()
-                .filter(item -> item.components().has(DataComponents.CONSUMABLE))
-                .collect(Collectors.toMap(
-                        BuiltInRegistries.ITEM::getKey,
-                        _ -> Math.random() < 0.1
-                ));
+        return new HashMap<>();
+    }
+
+    public static boolean isAllergicTo(ServerLevel level, Player player, Item item) {
+        if (!item.components().has(DataComponents.CONSUMABLE))
+            return false;
+
+        Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
+        return hasDeterministicChance(level.getSeed(), player.getUUID(), itemId);
+    }
+
+    public static boolean hasDeterministicChance(long worldSeed, UUID playerUuid, Identifier itemId) {
+        long mixed = worldSeed;
+        mixed ^= playerUuid.getMostSignificantBits();
+        mixed = mix64(mixed);
+        mixed ^= playerUuid.getLeastSignificantBits();
+        mixed = mix64(mixed);
+        mixed = mixIdentifier(mixed, itemId);
+
+        // 1 in 10 chance for each food item to be allergic.
+        return Math.floorMod(mixed, 10) == 0;
+    }
+
+    private static long mixIdentifier(long seed, Identifier itemId) {
+        String value = itemId.toString();
+        long mixed = seed ^ value.length();
+        for (int index = 0; index < value.length(); index++) {
+            mixed ^= value.charAt(index);
+            mixed *= 0x100000001b3L;
+        }
+
+        return mix64(mixed);
+    }
+
+    private static long mix64(long value) {
+        value = (value ^ (value >>> 30)) * 0xbf58476d1ce4e5b9L;
+        value = (value ^ (value >>> 27)) * 0x94d049bb133111ebL;
+        return value ^ (value >>> 31);
     }
 
     public static @NonNull List<MobEffectInstance> getAllergyEffects(RandomSource randomSource) {

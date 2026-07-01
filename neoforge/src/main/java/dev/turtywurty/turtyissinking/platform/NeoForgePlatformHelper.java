@@ -2,8 +2,10 @@ package dev.turtywurty.turtyissinking.platform;
 
 import dev.turtywurty.turtyissinking.init.NeoForgeAttachments;
 import dev.turtywurty.turtyissinking.platform.services.IPlatformHelper;
+import dev.turtywurty.turtyissinking.util.AllergyUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
@@ -66,13 +68,13 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     @Override
     public boolean isAllergic(Player player, Item item) {
         Map<Identifier, Boolean> allergicItems = player.getData(NeoForgeAttachments.ALLERGIC_ITEMS.get());
-        Boolean existingValue = allergicItems.get(BuiltInRegistries.ITEM.getKey(item));
-        if (existingValue != null)
-            return existingValue;
+        Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
+        boolean isAllergic = AllergyUtils.isAllergicTo((ServerLevel) player.level(), player, item);
+        if (allergicItems.get(itemId) != Boolean.valueOf(isAllergic)) {
+            allergicItems.put(itemId, isAllergic);
+            player.setData(NeoForgeAttachments.ALLERGIC_ITEMS.get(), allergicItems);
+        }
 
-        boolean isAllergic = Math.random() < 0.1;
-        allergicItems.put(BuiltInRegistries.ITEM.getKey(item), isAllergic);
-        player.setData(NeoForgeAttachments.ALLERGIC_ITEMS.get(), allergicItems);
         return isAllergic;
     }
 }

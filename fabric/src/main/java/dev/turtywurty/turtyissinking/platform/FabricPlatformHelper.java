@@ -8,6 +8,7 @@ import dev.turtywurty.turtyissinking.util.Zombie67Data;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
@@ -67,13 +68,13 @@ public class FabricPlatformHelper implements IPlatformHelper {
             player.setAttached(FabricAttachments.ALLERGIC_ITEMS, allergicItems);
         }
 
-        Boolean existingValue = allergicItems.get(BuiltInRegistries.ITEM.getKey(item));
-        if (existingValue != null)
-            return existingValue;
+        Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
+        boolean isAllergic = AllergyUtils.isAllergicTo((ServerLevel) player.level(), player, item);
+        if (allergicItems.get(itemId) != Boolean.valueOf(isAllergic)) {
+            allergicItems.put(itemId, isAllergic);
+            player.setAttached(FabricAttachments.ALLERGIC_ITEMS, allergicItems);
+        }
 
-        boolean isAllergic = Math.random() < 0.1;
-        allergicItems.put(BuiltInRegistries.ITEM.getKey(item), isAllergic);
-        player.setAttached(FabricAttachments.ALLERGIC_ITEMS, allergicItems);
         return isAllergic;
     }
 }

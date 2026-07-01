@@ -5,6 +5,7 @@ import dev.turtywurty.turtyissinking.init.ModEntityTypes;
 import dev.turtywurty.turtyissinking.init.ModItems;
 import dev.turtywurty.turtyissinking.init.ModMobEffects;
 import dev.turtywurty.turtyissinking.screen.AgeVerificationScreen;
+import dev.turtywurty.turtyissinking.util.AllergyUtils;
 import dev.turtywurty.turtyissinking.util.PlayerAgeVerification;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
@@ -34,6 +35,7 @@ public class TurtyIsSinkingEnglishLanguageProvider extends LanguageProvider {
         add(TurtyIsSinkingAdvancementProvider.PUNCH_OBSIDIAN_TITLE, "Are you happy now you sick fuck?");
         add(TurtyIsSinkingAdvancementProvider.PUNCH_OBSIDIAN_DESCRIPTION, "Punch obsidian, therefore turning it into crying obsidian");
         add(ModItems.VILLAGER_NOSE.get(), "Villager's Nose");
+        add(AllergyUtils.ALLERGY_MESSAGE, "You are having an allergic reaction!");
     }
 
     private void add(Component component, String translation) {

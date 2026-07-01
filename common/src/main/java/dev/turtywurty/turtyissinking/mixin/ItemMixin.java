@@ -44,7 +44,7 @@ public class ItemMixin {
 
     @Unique
     private void turtyissinking$handleAllergies(ItemStack itemStack, Level level, LivingEntity entity) {
-        if (!(entity instanceof Player player))
+        if (!(level instanceof ServerLevel) || !(entity instanceof Player player))
             return;
 
         if (!Services.PLATFORM.isAllergic(player, itemStack.getItem()))
