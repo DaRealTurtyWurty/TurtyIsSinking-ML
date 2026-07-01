@@ -8,4 +8,5 @@ What's in the mod:
 - If you get music discs from the creative inventory, you get the achievement "Piracy. It's a crime."
 - If you punch obsidian, it turns into crying obsidian
 - You can now shear villager's noses, eat them, and wear them
-- dinnerbone music discs
+- Dinnerbone music discs
+- You can only eat potatoes if you're in ireland
