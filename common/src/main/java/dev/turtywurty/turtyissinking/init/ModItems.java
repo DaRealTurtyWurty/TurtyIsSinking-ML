@@ -1,5 +1,6 @@
 package dev.turtywurty.turtyissinking.init;
 
+import dev.turtywurty.turtyissinking.item.PhoneItem;
 import dev.turtywurty.turtyissinking.item.PoopItem;
 import dev.turtywurty.turtyissinking.platform.Services;
 import dev.turtywurty.turtyissinking.platform.services.util.RegistryHandle;
@@ -28,6 +29,8 @@ public final class ModItems {
                                             .setEquipSound(Holder.direct(SoundEvents.VILLAGER_AMBIENT))
                                             .build()
                             )));
+
+    public static final RegistryHandle<PhoneItem> PHONE = Services.REGISTRY.registerItem("phone", PhoneItem::new);
 
     public static void load() {
     }

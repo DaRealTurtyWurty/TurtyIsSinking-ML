@@ -5,6 +5,7 @@ import dev.turtywurty.turtyissinking.init.ModEntityTypes;
 import dev.turtywurty.turtyissinking.init.ModItems;
 import dev.turtywurty.turtyissinking.init.ModMobEffects;
 import dev.turtywurty.turtyissinking.screen.AgeVerificationScreen;
+import dev.turtywurty.turtyissinking.screen.PhoneCallScreen;
 import dev.turtywurty.turtyissinking.util.AllergyUtils;
 import dev.turtywurty.turtyissinking.util.PlayerAgeVerification;
 import net.minecraft.data.PackOutput;
@@ -37,6 +38,9 @@ public class TurtyIsSinkingEnglishLanguageProvider extends LanguageProvider {
         add(ModItems.VILLAGER_NOSE.get(), "Villager's Nose");
         add(AllergyUtils.ALLERGY_MESSAGE, "You are having an allergic reaction!");
         add("message.turtyissinking.no_littering", "No littering!");
+
+        add(PhoneCallScreen.TITLE, "Phone Call");
+        add(PhoneCallScreen.IS_CALLING_TEXT, "is calling...");
     }
 
     private void add(Component component, String translation) {

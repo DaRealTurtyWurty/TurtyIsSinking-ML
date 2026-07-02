@@ -21,6 +21,7 @@ public class TurtyIsSinkingModelProvider extends ModelProvider {
     protected void registerModels(@NonNull BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
         itemModels.generateFlatItem(ModItems.POOP.get(), ModelTemplates.FLAT_ITEM);
         generateItemState(itemModels, ModItems.VILLAGER_NOSE.get());
+        itemModels.generateFlatItem(ModItems.PHONE.get(), ModelTemplates.FLAT_ITEM);
     }
 
     private static void generateItemState(@NonNull ItemModelGenerators itemModels, @NonNull Item item) {

@@ -1,9 +1,11 @@
 package dev.turtywurty.turtyissinking;
 
 import dev.turtywurty.turtyissinking.network.ClientboundOpenAgeVerificationScreenPacket;
+import dev.turtywurty.turtyissinking.network.ClientboundOpenPhoneScreenPacket;
 import dev.turtywurty.turtyissinking.network.ClientboundReverseJukeboxPacket;
 import dev.turtywurty.turtyissinking.network.ServerboundAgeVerificationPacket;
 import dev.turtywurty.turtyissinking.screen.AgeVerificationScreen;
+import dev.turtywurty.turtyissinking.screen.PhoneCallScreen;
 import dev.turtywurty.turtyissinking.sound.ReversedJukeboxTracker;
 import dev.turtywurty.turtyissinking.util.PlayerAgeVerification;
 import net.minecraft.client.Minecraft;
@@ -30,6 +32,8 @@ public class NeoForgeEvents {
                 ageVerification.turtyissinking$setAgeVerified(payload.verified());
             }
         });
+
+        registrar.playToClient(ClientboundOpenPhoneScreenPacket.TYPE, ClientboundOpenPhoneScreenPacket.CODEC);
     }
 
     @SubscribeEvent
@@ -39,5 +43,8 @@ public class NeoForgeEvents {
 
         event.register(ClientboundReverseJukeboxPacket.TYPE,
                 (payload, context) -> context.enqueueWork(() -> ReversedJukeboxTracker.setReversed(payload.pos(), payload.reversed())));
+
+        event.register(ClientboundOpenPhoneScreenPacket.TYPE,
+                (_, context) -> context.enqueueWork(() -> Minecraft.getInstance().setScreenAndShow(new PhoneCallScreen())));
     }
 }
