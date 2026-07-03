@@ -18,10 +18,10 @@ public class PhoneCallScreen extends Screen {
     public static final Component TITLE = Component.translatable("screen." + Constants.MOD_ID + ".phone_call");
     public static final Component IS_CALLING_TEXT = Component.translatable("screen." + Constants.MOD_ID + ".is_calling");
     private static final Identifier PHONE_TEXTURE = Constants.id("textures/gui/iphone.png");
-    private static final Identifier DECLINE_CALL_BUTTON_TEXTURE = Constants.id("textures/gui/decline_call_button.png");
-    private static final int DECLINE_CALL_BUTTON_TEXTURE_SIZE = 360;
-    private static final int DECLINE_CALL_BUTTON_SIZE = 200;
-    private static final float DECLINE_CALL_BUTTON_BOTTOM_OFFSET = 0.13F;
+    private static final Identifier ACCEPT_CALL_BUTTON_TEXTURE = Constants.id("textures/gui/accept_call_button.png");
+    private static final int ACCEPT_CALL_BUTTON_TEXTURE_SIZE = 360;
+    private static final int ACCEPT_CALL_BUTTON_SIZE = 200;
+    private static final float ACCEPT_CALL_BUTTON_BOTTOM_OFFSET = 0.13F;
 
     private static final WeightedList<PhoneContact> CONTACTS = WeightedList.of(
             new Weighted<>(
@@ -100,15 +100,15 @@ public class PhoneCallScreen extends Screen {
         this.scaledCallerWidth = this.scaledPhoneWidth - Math.round((PHONE_LEFT + PHONE_RIGHT) * scale);
         this.scaledCallerHeight = this.scaledPhoneHeight - Math.round((PHONE_TOP + PHONE_BOTTOM) * scale);
 
-        int declineButtonSize = Math.round(DECLINE_CALL_BUTTON_SIZE * scale);
+        int acceptButtonSize = Math.round(ACCEPT_CALL_BUTTON_SIZE * scale);
         addRenderableWidget(new TexturedButton(
-                this.leftPos + this.scaledPhoneWidth / 2 - declineButtonSize / 2,
-                this.topPos + this.scaledPhoneHeight - Math.round(DECLINE_CALL_BUTTON_BOTTOM_OFFSET * this.scaledPhoneHeight) - declineButtonSize / 2,
-                declineButtonSize,
-                declineButtonSize,
-                DECLINE_CALL_BUTTON_TEXTURE,
-                DECLINE_CALL_BUTTON_TEXTURE_SIZE,
-                DECLINE_CALL_BUTTON_TEXTURE_SIZE,
+                this.leftPos + this.scaledPhoneWidth / 2 - acceptButtonSize / 2,
+                this.topPos + this.scaledPhoneHeight - Math.round(ACCEPT_CALL_BUTTON_BOTTOM_OFFSET * this.scaledPhoneHeight) - acceptButtonSize / 2,
+                acceptButtonSize,
+                acceptButtonSize,
+                ACCEPT_CALL_BUTTON_TEXTURE,
+                ACCEPT_CALL_BUTTON_TEXTURE_SIZE,
+                ACCEPT_CALL_BUTTON_TEXTURE_SIZE,
                 _ -> onClose()));
     }
 
