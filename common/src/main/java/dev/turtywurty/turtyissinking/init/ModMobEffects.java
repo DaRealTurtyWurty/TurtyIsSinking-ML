@@ -1,5 +1,6 @@
 package dev.turtywurty.turtyissinking.init;
 
+import dev.turtywurty.turtyissinking.effect.ADHDMobEffect;
 import dev.turtywurty.turtyissinking.effect.FlatulenceMobEffect;
 import dev.turtywurty.turtyissinking.effect.LactoseIntoleranceMobEffect;
 import dev.turtywurty.turtyissinking.platform.Services;
@@ -17,6 +18,9 @@ public final class ModMobEffects {
 
     public static final RegistryHandle<Holder<MobEffect>> FLATULENCE = Services.REGISTRY.registerMobEffect("flatulence",
             () -> new FlatulenceMobEffect(MobEffectCategory.HARMFUL, 0x351E10));
+
+    public static final RegistryHandle<Holder<MobEffect>> ADHD = Services.REGISTRY.registerMobEffect("adhd",
+            () -> new ADHDMobEffect(MobEffectCategory.HARMFUL, 0xFF0000));
 
     public static void load() {
     }

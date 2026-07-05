@@ -11,3 +11,4 @@ What's in the mod:
 - Music discs named "dinnerbone" play music in reverse
 - You can only eat potatoes if you're in ireland
 - If you throw an item in water (litter) a trident will fly up in the air and then hurdle towards you
+- Standing still for >30 seconds causes you to get the ADHD effect, which makes you perform random actions

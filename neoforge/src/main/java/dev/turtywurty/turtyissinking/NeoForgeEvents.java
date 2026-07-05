@@ -1,14 +1,15 @@
 package dev.turtywurty.turtyissinking;
 
-import dev.turtywurty.turtyissinking.network.ClientboundOpenAgeVerificationScreenPacket;
-import dev.turtywurty.turtyissinking.network.ClientboundOpenPhoneScreenPacket;
-import dev.turtywurty.turtyissinking.network.ClientboundReverseJukeboxPacket;
-import dev.turtywurty.turtyissinking.network.ServerboundAgeVerificationPacket;
+import dev.turtywurty.turtyissinking.init.ModMobEffects;
+import dev.turtywurty.turtyissinking.network.*;
 import dev.turtywurty.turtyissinking.screen.AgeVerificationScreen;
 import dev.turtywurty.turtyissinking.screen.PhoneCallScreen;
 import dev.turtywurty.turtyissinking.sound.ReversedJukeboxTracker;
 import dev.turtywurty.turtyissinking.util.PlayerAgeVerification;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.ChatScreen;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -34,6 +35,9 @@ public class NeoForgeEvents {
         });
 
         registrar.playToClient(ClientboundOpenPhoneScreenPacket.TYPE, ClientboundOpenPhoneScreenPacket.CODEC);
+        registrar.playToServer(ServerboundNotifyAfkPacket.TYPE, ServerboundNotifyAfkPacket.CODEC, (payload, context) -> {
+            context.player().addEffect(new MobEffectInstance(ModMobEffects.ADHD.get(), 5 * 20, payload.inactiveTicks() / (20 * 60)));
+        });
     }
 
     @SubscribeEvent
