@@ -13,12 +13,16 @@
     "MobMixin",
     "PlayerMixin",
     "ServerPlayerMixin",
+    "ServerboundChatPacketMixin",
+    "SignedMessageBodyPackedMixin",
+    "StringUtilMixin",
     "VillagerMixin",
     "ZombieMixin"
   ],
   "client": [
     "AbstractZombieRendererMixin",
     "AnimationUtilsMixin",
+    "ChatScreenMixin",
     "ClientPacketListenerMixin",
     "KeyboardHandlerMixin",
     "LevelEventHandlerMixin",

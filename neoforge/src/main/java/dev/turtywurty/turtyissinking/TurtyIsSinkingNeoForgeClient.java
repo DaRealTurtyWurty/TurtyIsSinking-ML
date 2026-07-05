@@ -1,10 +1,13 @@
 package dev.turtywurty.turtyissinking;
 
 import dev.turtywurty.turtyissinking.platform.ServicesClient;
+import dev.turtywurty.turtyissinking.util.ChatLimits;
 import dev.turtywurty.turtyissinking.util.ClientAfkTracker;
+import dev.turtywurty.turtyissinking.util.uwu.Uwuifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientChatEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
@@ -22,5 +25,10 @@ public final class TurtyIsSinkingNeoForgeClient {
     @SubscribeEvent
     public static void clientTick(ClientTickEvent.Post event) {
         ClientAfkTracker.tick();
+    }
+
+    @SubscribeEvent
+    public static void clientChat(ClientChatEvent event) {
+        event.setMessage(ChatLimits.truncateChatMessage(Uwuifier.DEFAULT.uwuify(event.getMessage())));
     }
 }
