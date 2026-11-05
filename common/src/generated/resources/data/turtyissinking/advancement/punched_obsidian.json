@@ -10,6 +10,7 @@
     }
   },
   "display": {
+    "background": "minecraft:gui/advancements/backgrounds/stone",
     "description": {
       "translate": "advancements.turtyissinking.punched_obsidian.description"
     },

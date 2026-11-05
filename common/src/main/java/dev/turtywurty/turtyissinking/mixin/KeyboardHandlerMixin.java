@@ -1,10 +1,10 @@
 package dev.turtywurty.turtyissinking.mixin;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import dev.turtywurty.turtyissinking.util.ClientAfkTracker;
 import net.minecraft.client.KeyboardHandler;
 import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.input.KeyEvent;
-import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,7 +17,7 @@ public class KeyboardHandlerMixin {
             at = @At("HEAD")
     )
     private void turtyissinking$keyPress(long handle, int action, KeyEvent event, CallbackInfo ci) {
-        if (action != GLFW.GLFW_RELEASE) {
+        if (action != InputConstants.RELEASE) {
             ClientAfkTracker.markActive();
         }
     }

@@ -2,10 +2,11 @@ package dev.turtywurty.turtyissinking.advancement.criterion;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.advancements.predicates.ContextAwarePredicate;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
@@ -22,15 +23,15 @@ public class GamemodeCriterion extends SimpleCriterionTrigger<GamemodeCriterion.
     }
 
     public record Conditions(
-            Optional<ContextAwarePredicate> playerPredicate,
+            Optional<Holder<LootItemCondition>> playerPredicate,
             GameType gameMode) implements SimpleCriterionTrigger.SimpleInstance {
         public static final Codec<GamemodeCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ContextAwarePredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::playerPredicate),
+                LootItemCondition.CODEC.optionalFieldOf("player").forGetter(Conditions::playerPredicate),
                 GameType.CODEC.fieldOf("gamemode").forGetter(Conditions::gameMode)
         ).apply(instance, Conditions::new));
 
         @Override
-        public @NonNull Optional<ContextAwarePredicate> player() {
+        public @NonNull Optional<Holder<LootItemCondition>> player() {
             return playerPredicate;
         }
 

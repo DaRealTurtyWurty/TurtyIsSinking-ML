@@ -1,7 +1,9 @@
 package dev.turtywurty.turtyissinking;
 
 import dev.turtywurty.turtyissinking.datagen.*;
+import net.minecraft.core.registries.Registries;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.data.event.GatherDataRegistryEntriesEvent;
 
 public final class TurtyIsSinkingDatagen {
     private TurtyIsSinkingDatagen() {
@@ -12,7 +14,10 @@ public final class TurtyIsSinkingDatagen {
         event.createProvider(TurtyIsSinkingEnglishLanguageProvider::new);
         event.createProvider(TurtyIsSinkingItemTagsProvider::new);
         event.createProvider(TurtyIsSinkingModelProvider::new);
-        event.createProvider(TurtyIsSinkingRecipeProvider::new);
-        event.createProvider(TurtyIsSinkingAdvancementProvider::new);
+    }
+
+    public static void onGatherRegistryEntries(GatherDataRegistryEntriesEvent event) {
+        event.add(Registries.ADVANCEMENT, new TurtyIsSinkingAdvancementProvider());
+        event.gatherFor("minecraft").recipe(TurtyIsSinkingRecipeProvider::new);
     }
 }

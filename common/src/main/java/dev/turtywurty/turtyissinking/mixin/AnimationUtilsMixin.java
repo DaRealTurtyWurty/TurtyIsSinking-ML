@@ -18,11 +18,7 @@ public class AnimationUtilsMixin {
 
     @Inject(
             method = "animateZombieArms",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/model/AnimationUtils;bobArms(Lnet/minecraft/client/model/geom/ModelPart;Lnet/minecraft/client/model/geom/ModelPart;F)V"
-            ),
-            cancellable = true
+            at = @At("TAIL")
     )
     private static <T extends UndeadRenderState> void turtyissinking$animateZombieArms(ModelPart leftArm, ModelPart rightArm, boolean aggressive, T state, CallbackInfo callbackInfo) {
         if (state instanceof Zombie67 sixSeven && sixSeven.turtyissinking$is67ing()) {
@@ -32,7 +28,6 @@ public class AnimationUtilsMixin {
             rightArm.xRot = HORIZONTAL_ARM_ROTATION - armWave;
             leftArm.zRot = 0.0F;
             rightArm.zRot = 0.0F;
-            callbackInfo.cancel();
         }
     }
 }

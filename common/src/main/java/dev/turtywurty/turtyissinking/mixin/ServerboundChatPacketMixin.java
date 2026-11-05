@@ -8,13 +8,8 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(ServerboundChatPacket.class)
 public class ServerboundChatPacketMixin {
-    @ModifyConstant(method = "<init>(Lnet/minecraft/network/FriendlyByteBuf;)V", constant = @Constant(intValue = 256))
-    private static int turtyissinking$increaseReadMessageLength(int original) {
-        return ChatLimits.MAX_CHAT_MESSAGE_LENGTH;
-    }
-
-    @ModifyConstant(method = "write", constant = @Constant(intValue = 256))
-    private int turtyissinking$increaseWriteMessageLength(int original) {
+    @ModifyConstant(method = "<clinit>", constant = @Constant(intValue = 256))
+    private static int turtyissinking$increaseMessageLength(int original) {
         return ChatLimits.MAX_CHAT_MESSAGE_LENGTH;
     }
 }

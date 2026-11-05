@@ -8,6 +8,7 @@ import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Prediction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.levelgen.SingleThreadedRandomSource;
 import net.minecraft.world.phys.AABB;
@@ -189,7 +191,7 @@ public class ADHDMobEffect extends MobEffect {
 
     private boolean handleDropItem(LivingEntity mob) {
         if (mob instanceof ServerPlayer player) {
-            player.drop(player.getItemInHand(InteractionHand.MAIN_HAND), true);
+            player.drop(player.getItemInHand(InteractionHand.MAIN_HAND), true, Prediction.SERVER_ONLY);
             return true;
         }
 
@@ -225,7 +227,7 @@ public class ADHDMobEffect extends MobEffect {
 
             if (entityHit != null) {
                 player.attack(entityHit.getEntity());
-                player.swing(InteractionHand.MAIN_HAND, true);
+                player.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, true);
                 return true;
             }
 
@@ -243,12 +245,12 @@ public class ADHDMobEffect extends MobEffect {
                         serverLevel.getMaxY(),
                         0
                 );
-                player.swing(InteractionHand.MAIN_HAND, true);
+                player.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, true);
                 return true;
             }
         }
 
-        mob.swing(InteractionHand.MAIN_HAND, true);
+        mob.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, true);
         return true;
     }
 

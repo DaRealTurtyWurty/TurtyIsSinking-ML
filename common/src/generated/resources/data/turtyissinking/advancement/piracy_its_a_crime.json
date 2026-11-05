@@ -18,6 +18,7 @@
     }
   },
   "display": {
+    "background": "minecraft:gui/advancements/backgrounds/stone",
     "description": {
       "translate": "advancements.turtyissinking.piracy_its_a_crime.description"
     },

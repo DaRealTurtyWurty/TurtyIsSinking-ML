@@ -10,6 +10,7 @@ public class TurtyIsSinkingNeoForge {
     public TurtyIsSinkingNeoForge(IEventBus eventBus) {
         TurtyIsSinkingCommon.init();
         eventBus.addListener(TurtyIsSinkingDatagen::onGatherClientData);
+        eventBus.addListener(TurtyIsSinkingDatagen::onGatherRegistryEntries);
         NeoForgeRegistryHelper.load(eventBus);
         NeoForgeAttachments.load(eventBus);
     }

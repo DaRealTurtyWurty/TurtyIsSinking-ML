@@ -3,10 +3,11 @@ package dev.turtywurty.turtyissinking.advancement.criterion;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.predicates.BlockPredicate;
-import net.minecraft.advancements.predicates.ContextAwarePredicate;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
@@ -22,15 +23,15 @@ public class PunchBlockCriterion extends SimpleCriterionTrigger<PunchBlockCriter
     }
 
     public record Conditions(
-            Optional<ContextAwarePredicate> playerPredicate,
+            Optional<Holder<LootItemCondition>> playerPredicate,
             BlockPredicate blockPredicate) implements SimpleCriterionTrigger.SimpleInstance {
         public static final Codec<PunchBlockCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ContextAwarePredicate.CODEC.optionalFieldOf("player").forGetter(PunchBlockCriterion.Conditions::playerPredicate),
+                LootItemCondition.CODEC.optionalFieldOf("player").forGetter(PunchBlockCriterion.Conditions::playerPredicate),
                 BlockPredicate.CODEC.fieldOf("block").forGetter(PunchBlockCriterion.Conditions::blockPredicate)
         ).apply(instance, PunchBlockCriterion.Conditions::new));
 
         @Override
-        public @NonNull Optional<ContextAwarePredicate> player() {
+        public @NonNull Optional<Holder<LootItemCondition>> player() {
             return playerPredicate;
         }
 
