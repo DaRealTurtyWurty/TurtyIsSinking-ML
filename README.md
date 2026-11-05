@@ -6,25 +6,17 @@ Common code uses TurtyMultiloader for registration, networking, synchronized att
 ticks, and data generation. Loader modules contain the entrypoints, chat callbacks, and the jukebox/audio mixins that
 differ between Fabric and NeoForge.
 
-## Local dependency
+## Building
 
-The default dependency repository is `../TurtyMultiloader/build/local-maven`, resolving to
-`E:\Programming\Java\Minecraft\TurtyMultiloader\build\local-maven` in this workspace. Publish the core library artifacts
-from that checkout before building, and repeat after changing the library:
-
-```powershell
-.\gradlew.bat :common:publishMavenJavaPublicationToLocalRepository :fabric:publishMavenJavaPublicationToLocalRepository :neoforge:publishMavenJavaPublicationToLocalRepository
-```
-
-Back in this project:
+TurtyMultiloader 1.1.0 is resolved from its public Maven repository at
+`https://dl.cloudsmith.io/public/turtywurty/turtymultiloader/maven/`.
 
 ```powershell
 .\gradlew.bat build
 ```
 
-Override `turtymultiloader_repository` and `turtymultiloader_version` with Gradle properties when using another checkout
-or Maven repository. Both loader JARs embed the corresponding TurtyMultiloader artifact; players do not need to install
-the library separately.
+Both loader JARs embed the corresponding published TurtyMultiloader artifact. No local library checkout or publishing
+step is required, and players do not need to install the library separately.
 
 ## Data generation
 
