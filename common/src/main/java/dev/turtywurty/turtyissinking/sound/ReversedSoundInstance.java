@@ -7,6 +7,8 @@ import org.jspecify.annotations.NonNull;
 
 public class ReversedSoundInstance extends SimpleSoundInstance {
     public ReversedSoundInstance(@NonNull SoundInstance delegate, @NonNull RandomSource randomSource) {
-        super(delegate.getIdentifier(), delegate.getSource(), 4.0F, 1.0F, randomSource, delegate.isLooping(), delegate.getDelay(), delegate.getAttenuation(), delegate.getX(), delegate.getY(), delegate.getZ(), delegate.isRelative());
+        super(delegate.getIdentifier(), delegate.getSource(), 4.0F, 1.0F, randomSource, delegate.isLooping(),
+            delegate.getDelay(), delegate.getAttenuation(), delegate.getX(), delegate.getY(), delegate.getZ(),
+            delegate.isRelative());
     }
 }

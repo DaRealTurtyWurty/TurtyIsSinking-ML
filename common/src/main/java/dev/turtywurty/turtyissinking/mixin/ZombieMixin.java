@@ -32,10 +32,7 @@ public class ZombieMixin extends Monster implements Zombie67 {
         }
     }
 
-    @Inject(
-            method = "addBehaviourGoals",
-            at = @At("TAIL")
-    )
+    @Inject(method = "addBehaviourGoals", at = @At("TAIL"))
     private void turtyissinking$addBehaviourGoals(CallbackInfo callbackInfo) {
         this.goalSelector.removeAllGoals(ZombieAttackGoal.class::isInstance);
         this.goalSelector.addGoal(3, new Zombie67Goal((Zombie) (Object) this, 1.0, false));

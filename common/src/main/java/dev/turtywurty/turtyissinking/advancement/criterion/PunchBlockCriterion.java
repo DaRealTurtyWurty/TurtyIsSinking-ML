@@ -23,12 +23,15 @@ public class PunchBlockCriterion extends SimpleCriterionTrigger<PunchBlockCriter
     }
 
     public record Conditions(
-            Optional<Holder<LootItemCondition>> playerPredicate,
-            BlockPredicate blockPredicate) implements SimpleCriterionTrigger.SimpleInstance {
-        public static final Codec<PunchBlockCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                LootItemCondition.CODEC.optionalFieldOf("player").forGetter(PunchBlockCriterion.Conditions::playerPredicate),
-                BlockPredicate.CODEC.fieldOf("block").forGetter(PunchBlockCriterion.Conditions::blockPredicate)
-        ).apply(instance, PunchBlockCriterion.Conditions::new));
+        Optional<Holder<LootItemCondition>> playerPredicate,
+        BlockPredicate blockPredicate
+    ) implements SimpleCriterionTrigger.SimpleInstance {
+        public static final Codec<PunchBlockCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance
+            .group(
+                LootItemCondition.CODEC.optionalFieldOf("player")
+                    .forGetter(PunchBlockCriterion.Conditions::playerPredicate),
+                BlockPredicate.CODEC.fieldOf("block").forGetter(PunchBlockCriterion.Conditions::blockPredicate))
+            .apply(instance, PunchBlockCriterion.Conditions::new));
 
         @Override
         public @NonNull Optional<Holder<LootItemCondition>> player() {

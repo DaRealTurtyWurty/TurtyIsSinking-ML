@@ -27,11 +27,15 @@ import java.util.List;
 import java.util.Optional;
 
 public class TurtyIsSinkingAdvancementProvider extends AdvancementProvider {
-    public static final Component PIRACY_ITS_A_CRIME_TITLE = Component.translatable("advancements." + Constants.MOD_ID + ".piracy_its_a_crime.title");
-    public static final Component PIRACY_ITS_A_CRIME_DESCRIPTION = Component.translatable("advancements." + Constants.MOD_ID + ".piracy_its_a_crime.description");
+    public static final Component PIRACY_ITS_A_CRIME_TITLE = Component
+        .translatable("advancements." + Constants.MOD_ID + ".piracy_its_a_crime.title");
+    public static final Component PIRACY_ITS_A_CRIME_DESCRIPTION = Component
+        .translatable("advancements." + Constants.MOD_ID + ".piracy_its_a_crime.description");
 
-    public static final Component PUNCH_OBSIDIAN_TITLE = Component.translatable("advancements." + Constants.MOD_ID + ".punched_obsidian.title");
-    public static final Component PUNCH_OBSIDIAN_DESCRIPTION = Component.translatable("advancements." + Constants.MOD_ID + ".punched_obsidian.description");
+    public static final Component PUNCH_OBSIDIAN_TITLE = Component
+        .translatable("advancements." + Constants.MOD_ID + ".punched_obsidian.title");
+    public static final Component PUNCH_OBSIDIAN_DESCRIPTION = Component
+        .translatable("advancements." + Constants.MOD_ID + ".punched_obsidian.description");
 
     public TurtyIsSinkingAdvancementProvider() {
         super(List.of(Subprovider::new));
@@ -48,39 +52,37 @@ public class TurtyIsSinkingAdvancementProvider extends AdvancementProvider {
             HolderGetter<Block> blockGetter = this.output.lookup(Registries.BLOCK);
 
             Advancement.Builder.advancement()
-                    .rootDisplay(
-                            Items.MUSIC_DISC_CHIRP,
-                            PIRACY_ITS_A_CRIME_TITLE,
-                            PIRACY_ITS_A_CRIME_DESCRIPTION,
-                            Identifier.withDefaultNamespace("gui/advancements/backgrounds/stone"),
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            true
-                    )
-                    .addCriterion("has_music_disc",
-                            InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item()
-                                    .of(itemGetter, ConventionTags.item("music_discs").key())
-                                    .build()))
-                    .addCriterion("is_creative", ModCriteria.GAMEMODE.get()
-                            .createCriterion(new GamemodeCriterion.Conditions(Optional.empty(), GameType.CREATIVE)))
-                    .save(this.output, Constants.id("piracy_its_a_crime").toString());
+                .rootDisplay(
+                    Items.MUSIC_DISC_CHIRP,
+                    PIRACY_ITS_A_CRIME_TITLE,
+                    PIRACY_ITS_A_CRIME_DESCRIPTION,
+                    Identifier.withDefaultNamespace("gui/advancements/backgrounds/stone"),
+                    AdvancementType.TASK,
+                    true,
+                    true,
+                    true)
+                .addCriterion("has_music_disc",
+                    InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item()
+                        .of(itemGetter, ConventionTags.item("music_discs").key())
+                        .build()))
+                .addCriterion("is_creative", ModCriteria.GAMEMODE.get()
+                    .createCriterion(new GamemodeCriterion.Conditions(Optional.empty(), GameType.CREATIVE)))
+                .save(this.output, Constants.id("piracy_its_a_crime").toString());
 
             Advancement.Builder.advancement()
-                    .rootDisplay(
-                            Items.CRYING_OBSIDIAN,
-                            PUNCH_OBSIDIAN_TITLE,
-                            PUNCH_OBSIDIAN_DESCRIPTION,
-                            Identifier.withDefaultNamespace("gui/advancements/backgrounds/stone"),
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            true
-                    )
-                    .addCriterion("punched_obsidian", ModCriteria.PUNCH_BLOCK.get()
-                            .createCriterion(new PunchBlockCriterion.Conditions(Optional.empty(),
-                                    BlockPredicate.Builder.block().of(blockGetter, Blocks.OBSIDIAN).build())))
-                    .save(this.output, Constants.id("punched_obsidian").toString());
+                .rootDisplay(
+                    Items.CRYING_OBSIDIAN,
+                    PUNCH_OBSIDIAN_TITLE,
+                    PUNCH_OBSIDIAN_DESCRIPTION,
+                    Identifier.withDefaultNamespace("gui/advancements/backgrounds/stone"),
+                    AdvancementType.TASK,
+                    true,
+                    true,
+                    true)
+                .addCriterion("punched_obsidian", ModCriteria.PUNCH_BLOCK.get()
+                    .createCriterion(new PunchBlockCriterion.Conditions(Optional.empty(),
+                        BlockPredicate.Builder.block().of(blockGetter, Blocks.OBSIDIAN).build())))
+                .save(this.output, Constants.id("punched_obsidian").toString());
         }
     }
 }

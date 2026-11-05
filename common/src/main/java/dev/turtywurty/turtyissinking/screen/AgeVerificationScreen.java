@@ -10,8 +10,10 @@ import net.minecraft.network.chat.Component;
 
 public class AgeVerificationScreen extends Screen {
     public static final Component TITLE = Component.translatable("screen.turtyissinking.age_verification.title");
-    public static final Component I_AM_OVER_18_BUTTON = Component.translatable("screen.turtyissinking.age_verification.button.over_18");
-    public static final Component I_AM_UNDER_18_BUTTON = Component.translatable("screen.turtyissinking.age_verification.button.under_18");
+    public static final Component I_AM_OVER_18_BUTTON = Component
+        .translatable("screen.turtyissinking.age_verification.button.over_18");
+    public static final Component I_AM_UNDER_18_BUTTON = Component
+        .translatable("screen.turtyissinking.age_verification.button.under_18");
 
     public AgeVerificationScreen() {
         super(TITLE);

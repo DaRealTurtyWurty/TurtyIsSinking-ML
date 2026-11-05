@@ -23,7 +23,7 @@ public class VillagerMixin implements SnippableVillager {
     @Override
     public boolean turtyissinking$hasSnippedNose() {
         return AttachmentTarget.entity((Villager) (Object) this)
-                .get(ModAttachments.VILLAGER_NOSE_SNIPPED).orElse(false);
+            .get(ModAttachments.VILLAGER_NOSE_SNIPPED).orElse(false);
     }
 
     @Override
@@ -33,18 +33,16 @@ public class VillagerMixin implements SnippableVillager {
         }
     }
 
-    @Inject(
-            method = "mobInteract",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/ItemStack;is(Ljava/lang/Object;)Z"
-            ),
-            cancellable = true
-    )
-    private void turtyissinking$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> callbackInfo, @Local(name = "itemStack") ItemStack itemStack) {
+    @Inject(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Ljava/lang/Object;)Z"), cancellable = true)
+    private void turtyissinking$mobInteract(
+        Player player,
+        InteractionHand hand,
+        CallbackInfoReturnable<InteractionResult> callbackInfo,
+        @Local(name = "itemStack") ItemStack itemStack
+    ) {
         if (!itemStack.is(ModTags.Items.SHEAR_TOOLS)
-                || !((Object) this instanceof SnippableVillager snippableVillager)
-                || snippableVillager.turtyissinking$hasSnippedNose())
+            || !((Object) this instanceof SnippableVillager snippableVillager)
+            || snippableVillager.turtyissinking$hasSnippedNose())
             return;
 
         snippableVillager.turtyissinking$setNoseSnipped(true);

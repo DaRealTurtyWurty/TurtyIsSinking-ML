@@ -12,10 +12,10 @@ public final class IPUtils {
     private static final long IP_CACHE_REVALIDATE_INTERVAL_MS = 1000 * 60 * 5; // 5 minutes
 
     private static final String[] CHECK_IP_URLS = {
-            "https://checkip.amazonaws.com/",
-            "https://ipv4.icanhazip.com/",
-            "https://myexternalip.com/raw",
-            "https://ipecho.net/plain"
+        "https://checkip.amazonaws.com/",
+        "https://ipv4.icanhazip.com/",
+        "https://myexternalip.com/raw",
+        "https://ipecho.net/plain"
     };
 
     private static final String GEO_LOCATE_API = "http://ip-api.com/line/%s?fields=countryCode";
@@ -39,8 +39,9 @@ public final class IPUtils {
 
             String externalIP = fetchExternalIP();
             lastExternalIPValidation = currentTime;
-            if (externalIP != null)
+            if (externalIP != null) {
                 cachedExternalIP = externalIP;
+            }
 
             return cachedExternalIP;
         }
@@ -63,7 +64,7 @@ public final class IPUtils {
                             return ip.trim();
                     }
                 }
-            } catch (Exception ignored) {
+            } catch (Exception _) {
             }
         }
 
@@ -79,13 +80,14 @@ public final class IPUtils {
             String cachedCountryCode = cachedCountryCodes.get(ip);
             Long lastCountryCodeValidation = lastCountryCodeValidations.get(ip);
             if (cachedCountryCode != null && lastCountryCodeValidation != null &&
-                    currentTime - lastCountryCodeValidation < IP_CACHE_REVALIDATE_INTERVAL_MS)
+                currentTime - lastCountryCodeValidation < IP_CACHE_REVALIDATE_INTERVAL_MS)
                 return cachedCountryCode;
 
             String countryCode = fetchCountryCode(ip);
             lastCountryCodeValidations.put(ip, currentTime);
-            if (countryCode != null)
+            if (countryCode != null) {
                 cachedCountryCodes.put(ip, countryCode);
+            }
 
             return cachedCountryCodes.get(ip);
         }
@@ -107,7 +109,7 @@ public final class IPUtils {
                         return countryCode.trim();
                 }
             }
-        } catch (Exception ignored) {
+        } catch (Exception _) {
         }
 
         return null;

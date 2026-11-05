@@ -15,11 +15,27 @@ public class FadableSimpleSoundInstance extends AbstractTickableSoundInstance {
     private int fadeDirection;
     private int fade;
 
-    public FadableSimpleSoundInstance(SoundEvent sound, SoundSource source, float volume, float pitch, RandomSource random, BlockPos pos) {
+    public FadableSimpleSoundInstance(
+        SoundEvent sound,
+        SoundSource source,
+        float volume,
+        float pitch,
+        RandomSource random,
+        BlockPos pos
+    ) {
         this(sound, source, volume, pitch, random, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
     }
 
-    public FadableSimpleSoundInstance(SoundEvent sound, SoundSource source, float volume, float pitch, RandomSource random, double x, double y, double z) {
+    public FadableSimpleSoundInstance(
+        SoundEvent sound,
+        SoundSource source,
+        float volume,
+        float pitch,
+        RandomSource random,
+        double x,
+        double y,
+        double z
+    ) {
         super(sound, source, random);
         this.targetVolume = volume;
         this.volume = 0.0F;

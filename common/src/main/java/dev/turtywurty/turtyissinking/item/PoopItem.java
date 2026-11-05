@@ -27,9 +27,11 @@ public class PoopItem extends Item implements ProjectileItem {
     @Override
     public @NonNull InteractionResult use(Level level, Player player, @NonNull InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW,
+            SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
         if (level instanceof ServerLevel serverLevel) {
-            Projectile.spawnProjectileFromRotation(PoopProjectile::new, serverLevel, itemStack, player, 0.0F, PROJECTILE_SHOOT_POWER, 1.0F);
+            Projectile.spawnProjectileFromRotation(PoopProjectile::new, serverLevel, itemStack, player, 0.0F,
+                PROJECTILE_SHOOT_POWER, 1.0F);
         }
 
         player.awardStat(Stats.ITEM_USED.get(this));
@@ -38,7 +40,12 @@ public class PoopItem extends Item implements ProjectileItem {
     }
 
     @Override
-    public @NonNull Projectile asProjectile(@NonNull Level level, Position position, @NonNull ItemStack itemStack, @NonNull Direction direction) {
+    public @NonNull Projectile asProjectile(
+        @NonNull Level level,
+        Position position,
+        @NonNull ItemStack itemStack,
+        @NonNull Direction direction
+    ) {
         return new PoopProjectile(level, position.x(), position.y(), position.z(), itemStack);
     }
 }

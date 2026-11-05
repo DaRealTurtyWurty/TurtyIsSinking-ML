@@ -14,13 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Animal.class)
 public class AnimalMixin {
-    @Inject(
-            method = "setInLove",
-            at = @At("HEAD"),
-            cancellable = true
-    )
+    @Inject(method = "setInLove", at = @At("HEAD"), cancellable = true)
     private void turtyissinking$setInLove(@Nullable Player player, CallbackInfo callbackInfo) {
-        if (!(player instanceof PlayerAgeVerification ageVerification) || ageVerification.turtyissinking$isAgeVerified())
+        if (!(player instanceof PlayerAgeVerification ageVerification)
+            || ageVerification.turtyissinking$isAgeVerified())
             return;
 
         callbackInfo.cancel();

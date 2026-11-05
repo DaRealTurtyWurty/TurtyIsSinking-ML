@@ -12,10 +12,10 @@ public class TurtyIsSinkingNeoForge {
     public TurtyIsSinkingNeoForge(IEventBus eventBus) {
         TurtyIsSinkingCommon.init();
         eventBus.addListener(GatherDataEvent.Client.class,
-                event -> NeoForgeDataGeneration.run(event, ModDataGeneration.SPEC));
+            event -> NeoForgeDataGeneration.run(event, ModDataGeneration.SPEC));
         eventBus.addListener(GatherDataEvent.Server.class,
-                event -> NeoForgeDataGeneration.run(event, ModDataGeneration.SPEC));
+            event -> NeoForgeDataGeneration.run(event, ModDataGeneration.SPEC));
         eventBus.addListener(GatherDataRegistryEntriesEvent.class,
-                event -> NeoForgeDataGeneration.run(event, ModDataGeneration.SPEC));
+            event -> NeoForgeDataGeneration.run(event, ModDataGeneration.SPEC));
     }
 }

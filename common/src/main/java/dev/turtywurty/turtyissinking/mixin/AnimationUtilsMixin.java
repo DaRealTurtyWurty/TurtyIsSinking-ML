@@ -16,11 +16,14 @@ public class AnimationUtilsMixin {
     @Unique
     private static final float HORIZONTAL_ARM_ROTATION = -(float) Math.PI / 2.0F;
 
-    @Inject(
-            method = "animateZombieArms",
-            at = @At("TAIL")
-    )
-    private static <T extends UndeadRenderState> void turtyissinking$animateZombieArms(ModelPart leftArm, ModelPart rightArm, boolean aggressive, T state, CallbackInfo callbackInfo) {
+    @Inject(method = "animateZombieArms", at = @At("TAIL"))
+    private static <T extends UndeadRenderState> void turtyissinking$animateZombieArms(
+        ModelPart leftArm,
+        ModelPart rightArm,
+        boolean aggressive,
+        T state,
+        CallbackInfo callbackInfo
+    ) {
         if (state instanceof Zombie67 sixSeven && sixSeven.turtyissinking$is67ing()) {
             float armWave = Mth.sin(state.ageInTicks * 0.75F) * 0.65F;
 

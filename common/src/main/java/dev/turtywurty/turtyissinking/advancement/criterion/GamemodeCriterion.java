@@ -23,12 +23,13 @@ public class GamemodeCriterion extends SimpleCriterionTrigger<GamemodeCriterion.
     }
 
     public record Conditions(
-            Optional<Holder<LootItemCondition>> playerPredicate,
-            GameType gameMode) implements SimpleCriterionTrigger.SimpleInstance {
-        public static final Codec<GamemodeCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        Optional<Holder<LootItemCondition>> playerPredicate,
+        GameType gameMode
+    ) implements SimpleCriterionTrigger.SimpleInstance {
+        public static final Codec<GamemodeCriterion.Conditions> CODEC = RecordCodecBuilder
+            .create(instance -> instance.group(
                 LootItemCondition.CODEC.optionalFieldOf("player").forGetter(Conditions::playerPredicate),
-                GameType.CODEC.fieldOf("gamemode").forGetter(Conditions::gameMode)
-        ).apply(instance, Conditions::new));
+                GameType.CODEC.fieldOf("gamemode").forGetter(Conditions::gameMode)).apply(instance, Conditions::new));
 
         @Override
         public @NonNull Optional<Holder<LootItemCondition>> player() {

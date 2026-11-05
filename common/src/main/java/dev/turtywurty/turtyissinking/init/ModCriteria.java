@@ -9,10 +9,12 @@ import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.registries.Registries;
 
 public final class ModCriteria {
-    public static final RegistrationHandle<CriterionTrigger<?>, GamemodeCriterion> GAMEMODE = RegistryService.get().register(Registries.TRIGGER_TYPE, Constants.id("gamemode"),
+    public static final RegistrationHandle<CriterionTrigger<?>, GamemodeCriterion> GAMEMODE = RegistryService.get()
+        .register(Registries.TRIGGER_TYPE, Constants.id("gamemode"),
             GamemodeCriterion::new);
 
-    public static final RegistrationHandle<CriterionTrigger<?>, PunchBlockCriterion> PUNCH_BLOCK = RegistryService.get().register(Registries.TRIGGER_TYPE, Constants.id("punch_block"),
+    public static final RegistrationHandle<CriterionTrigger<?>, PunchBlockCriterion> PUNCH_BLOCK = RegistryService.get()
+        .register(Registries.TRIGGER_TYPE, Constants.id("punch_block"),
             PunchBlockCriterion::new);
 
     public static void load() {

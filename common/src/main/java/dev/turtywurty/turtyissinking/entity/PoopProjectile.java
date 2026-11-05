@@ -40,8 +40,8 @@ public class PoopProjectile extends ThrowableItemProjectile {
     private ParticleOptions getParticle() {
         ItemStack item = getItem();
         return item.isEmpty()
-                ? ParticleTypes.ITEM_SNOWBALL
-                : new ItemParticleOption(ParticleTypes.ITEM, ItemStackTemplate.fromNonEmptyStack(item));
+            ? ParticleTypes.ITEM_SNOWBALL
+            : new ItemParticleOption(ParticleTypes.ITEM, ItemStackTemplate.fromNonEmptyStack(item));
     }
 
     @Override

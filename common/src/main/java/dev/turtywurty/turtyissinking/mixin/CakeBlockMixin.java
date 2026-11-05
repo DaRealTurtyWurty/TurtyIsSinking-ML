@@ -15,15 +15,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CakeBlock.class)
 public class CakeBlockMixin {
-    @Inject(
-            method = "eat",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/food/FoodData;eat(IF)V",
-                    shift = At.Shift.AFTER
-            )
-    )
-    private static void turtyissinking$eat(LevelAccessor level, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<InteractionResult> callbackInfoReturnable) {
+    @Inject(method = "eat", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;eat(IF)V", shift = At.Shift.AFTER))
+    private static void turtyissinking$eat(
+        LevelAccessor level,
+        BlockPos pos,
+        BlockState state,
+        Player player,
+        CallbackInfoReturnable<InteractionResult> callbackInfoReturnable
+    ) {
         if (!(level instanceof ServerLevel serverLevel))
             return;
 

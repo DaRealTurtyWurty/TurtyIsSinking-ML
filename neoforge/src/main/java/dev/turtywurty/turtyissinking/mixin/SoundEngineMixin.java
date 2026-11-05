@@ -19,18 +19,14 @@ import java.util.concurrent.CompletionException;
 
 @Mixin(SoundEngine.class)
 public class SoundEngineMixin {
-    @WrapOperation(
-            method = "play",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/resources/sounds/SoundInstance;getStream(Lnet/minecraft/client/sounds/SoundBufferLibrary;Lnet/minecraft/client/resources/sounds/Sound;Z)Ljava/util/concurrent/CompletableFuture;"
-            )
-    )
-    private CompletableFuture<AudioStream> turtyissinking$reverseStreamedSound(SoundInstance instance,
-                                                                               SoundBufferLibrary soundBuffers,
-                                                                               Sound sound,
-                                                                               boolean looping,
-                                                                               Operation<CompletableFuture<AudioStream>> original) {
+    @WrapOperation(method = "play", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/resources/sounds/SoundInstance;getStream(Lnet/minecraft/client/sounds/SoundBufferLibrary;Lnet/minecraft/client/resources/sounds/Sound;Z)Ljava/util/concurrent/CompletableFuture;"))
+    private CompletableFuture<AudioStream> turtyissinking$reverseStreamedSound(
+        SoundInstance instance,
+        SoundBufferLibrary soundBuffers,
+        Sound sound,
+        boolean looping,
+        Operation<CompletableFuture<AudioStream>> original
+    ) {
         CompletableFuture<AudioStream> streamFuture = original.call(instance, soundBuffers, sound, looping);
         if (!(instance instanceof ReversedSoundInstance))
             return streamFuture;

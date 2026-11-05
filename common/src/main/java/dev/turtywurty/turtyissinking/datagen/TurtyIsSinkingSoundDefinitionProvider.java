@@ -13,13 +13,14 @@ import java.util.concurrent.CompletableFuture;
 public final class TurtyIsSinkingSoundDefinitionProvider implements DataProvider {
     public static final String THUNDER_SUBTITLE = "subtitle." + Constants.MOD_ID + ".thunder";
     public static final String FART_SUBTITLE = "subtitle." + Constants.MOD_ID + ".fart";
-    public static final String BABY_ZOMBIE_SIX_SEVEN_SUBTITLE = "subtitle." + Constants.MOD_ID + ".baby_zombie_six_seven";
+    public static final String BABY_ZOMBIE_SIX_SEVEN_SUBTITLE = "subtitle." + Constants.MOD_ID
+        + ".baby_zombie_six_seven";
 
     private final Path path;
 
     public TurtyIsSinkingSoundDefinitionProvider(PackOutput output) {
         this.path = output.getOutputFolder(PackOutput.Target.RESOURCE_PACK)
-                .resolve(Constants.MOD_ID).resolve("sounds.json");
+            .resolve(Constants.MOD_ID).resolve("sounds.json");
     }
 
     private static JsonObject sound(String subtitle, String... files) {
@@ -38,9 +39,9 @@ public final class TurtyIsSinkingSoundDefinitionProvider implements DataProvider
         var sounds = new JsonObject();
         sounds.add("thunder", sound(THUNDER_SUBTITLE, "thunder"));
         sounds.add("fart", sound(FART_SUBTITLE,
-                "266450__ezcah__chair-fart", "402569__teddyferguson__fart", "610067__teddyferguson__fart",
-                "640803__dsisstudios__trumpet-fart", "645339__samsterbirdies__nasty-fart",
-                "777448__frenkfurth__wav-fart-vegan-086", "833105__crimsonblaze__funny-fart"));
+            "266450__ezcah__chair-fart", "402569__teddyferguson__fart", "610067__teddyferguson__fart",
+            "640803__dsisstudios__trumpet-fart", "645339__samsterbirdies__nasty-fart",
+            "777448__frenkfurth__wav-fart-vegan-086", "833105__crimsonblaze__funny-fart"));
         sounds.add("baby_zombie_six_seven", sound(BABY_ZOMBIE_SIX_SEVEN_SUBTITLE, "baby_zombie_six_seven"));
         return DataProvider.saveStable(output, sounds, this.path);
     }

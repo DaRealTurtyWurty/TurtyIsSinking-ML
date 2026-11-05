@@ -10,9 +10,8 @@ import org.jspecify.annotations.NonNull;
 public record ServerboundAgeVerificationPacket(boolean verified) implements CustomPacketPayload {
     public static final Type<ServerboundAgeVerificationPacket> TYPE = new Type<>(Constants.id("age_verification"));
     public static final StreamCodec<ByteBuf, ServerboundAgeVerificationPacket> CODEC = StreamCodec.composite(
-            ByteBufCodecs.BOOL, ServerboundAgeVerificationPacket::verified,
-            ServerboundAgeVerificationPacket::new
-    );
+        ByteBufCodecs.BOOL, ServerboundAgeVerificationPacket::verified,
+        ServerboundAgeVerificationPacket::new);
 
     @Override
     public @NonNull Type<? extends CustomPacketPayload> type() {

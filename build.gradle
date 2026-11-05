@@ -1,4 +1,6 @@
 plugins {
+    id 'base'
+    id 'dev.railroadide.quality' version '1.0.0' apply false
     // see https://maven.fabricmc.net/fabric-loom/fabric-loom.gradle.plugin/maven-metadata.xml for new versions
     id 'net.fabricmc.fabric-loom' version '1.17.21' apply false
     // see https://projects.neoforged.net/neoforged/moddevgradle for new versions
@@ -6,11 +8,93 @@ plugins {
 }
 
 subprojects {
+    apply plugin: 'dev.railroadide.quality'
+
+    railroadQuality {
+        // Each module owns its sources; shared code is checked once by common.
+        javaSources.setFrom(provider {
+            sourceSets.collectMany { it.allJava.files }.findAll {
+                it.toPath().startsWith(projectDir.toPath())
+            }
+        })
+        coverageSources.setFrom(provider {
+            sourceSets.main.allJava.files.findAll {
+                it.toPath().startsWith(projectDir.toPath())
+            }
+        })
+    }
+
     repositories {
+        mavenCentral()
         maven {
             name = 'TurtyMultiloader'
             url = rootProject.uri(turtymultiloader_repository)
             content { includeGroup('dev.turtywurty.turtymultiloader') }
         }
     }
+
+    tasks.named('check') {
+        dependsOn('formatCheck')
+    }
+}
+
+apply plugin: 'com.diffplug.spotless'
+
+repositories {
+    mavenCentral()
+}
+
+def qualityConfig = project(':common').layout.buildDirectory.dir('railroad-quality/config')
+spotless {
+    groovyGradle {
+        target('*.gradle', 'gradle/**/*.gradle', 'build-logic/*.gradle', 'build-logic/src/**/*.gradle')
+        greclipse().configFile(qualityConfig.get().file('railroad-groovy.properties').asFile)
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
+
+tasks.matching {
+    it.name.startsWith('spotless') && it.name != 'spotlessDiagnose'
+}.configureEach {
+    dependsOn(':common:railroadQualityConfig')
+}
+
+tasks.named('spotlessApply') {
+    mustRunAfter(subprojects.collect { "${it.path}:format" })
+}
+tasks.named('spotlessCheck') {
+    mustRunAfter(subprojects.collect { "${it.path}:formatCheck" })
+}
+
+tasks.register('format') {
+    group = 'formatting'
+    description = 'Formats all modules and shared Gradle build scripts.'
+    dependsOn(subprojects.collect { "${it.path}:format" }, 'spotlessApply')
+}
+
+tasks.register('formatCheck') {
+    group = 'verification'
+    description = 'Checks formatting across all modules and shared Gradle build scripts.'
+    dependsOn(subprojects.collect { "${it.path}:formatCheck" }, 'spotlessCheck')
+}
+
+tasks.register('javadocCoverage') {
+    group = 'documentation'
+    description = 'Generates Javadoc coverage reports for all modules.'
+    dependsOn(subprojects.collect { "${it.path}:javadocCoverage" })
+}
+
+tasks.register('javadocCoverageCheck') {
+    group = 'verification'
+    description = 'Checks public API Javadoc coverage across all modules.'
+    dependsOn(subprojects.collect { "${it.path}:javadocCoverageCheck" })
+}
+
+tasks.named('assemble') {
+    dependsOn(subprojects.collect { "${it.path}:assemble" })
+}
+
+tasks.named('check') {
+    dependsOn(subprojects.collect { "${it.path}:check" }, 'formatCheck')
 }

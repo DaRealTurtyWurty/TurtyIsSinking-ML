@@ -21,14 +21,12 @@ public class LevelEventHandlerMixin {
     @Final
     private ClientLevel level;
 
-    @WrapOperation(
-            method = "playJukeboxSong",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/resources/sounds/SimpleSoundInstance;forJukeboxSong(Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/client/resources/sounds/SimpleSoundInstance;"
-            )
-    )
-    private SimpleSoundInstance turtyissinking$playJukeboxSong(SoundEvent sound, Vec3 pos, Operation<SimpleSoundInstance> original) {
+    @WrapOperation(method = "playJukeboxSong", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/resources/sounds/SimpleSoundInstance;forJukeboxSong(Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/client/resources/sounds/SimpleSoundInstance;"))
+    private SimpleSoundInstance turtyissinking$playJukeboxSong(
+        SoundEvent sound,
+        Vec3 pos,
+        Operation<SimpleSoundInstance> original
+    ) {
         SimpleSoundInstance soundInstance = original.call(sound, pos);
         if (soundInstance == null)
             return null;

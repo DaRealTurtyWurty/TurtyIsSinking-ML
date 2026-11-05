@@ -17,10 +17,7 @@ public class VillagerModelMixin {
     @Final
     private ModelPart head;
 
-    @Inject(
-            method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/VillagerRenderState;)V",
-            at = @At("TAIL")
-    )
+    @Inject(method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/VillagerRenderState;)V", at = @At("TAIL"))
     private void turtyissinking$setupAnim(VillagerRenderState state, CallbackInfo callbackInfo) {
         if (state instanceof SnippableVillager snippableVillager) {
             this.head.getChild("nose").visible = !snippableVillager.turtyissinking$hasSnippedNose();

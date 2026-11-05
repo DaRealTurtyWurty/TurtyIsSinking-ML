@@ -16,19 +16,21 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.Equippable;
 
 public final class ModItems {
-    public static final RegistrationHandle<Item, PoopItem> POOP = RegistryService.get().registerItem(Constants.id("poop"), () -> new PoopItem(properties("poop")));
-    public static final RegistrationHandle<Item, Item> VILLAGER_NOSE = RegistryService.get().registerItem(Constants.id("villager_nose"),
-            () -> new Item(
-                    properties("villager_nose")
-                            .food(new FoodProperties(4, 0.3F, true))
-                            .component(
-                                    DataComponents.EQUIPPABLE,
-                                    Equippable.builder(EquipmentSlot.HEAD)
-                                            .setSwappable(false)
-                                            .setEquipSound(Holder.direct(SoundEvents.VILLAGER_AMBIENT))
-                                            .build()
-                            )));
-    public static final RegistrationHandle<Item, PhoneItem> PHONE = RegistryService.get().registerItem(Constants.id("phone"), () -> new PhoneItem(properties("phone")));
+    public static final RegistrationHandle<Item, PoopItem> POOP = RegistryService.get()
+        .registerItem(Constants.id("poop"), () -> new PoopItem(properties("poop")));
+    public static final RegistrationHandle<Item, Item> VILLAGER_NOSE = RegistryService.get().registerItem(
+        Constants.id("villager_nose"),
+        () -> new Item(
+            properties("villager_nose")
+                .food(new FoodProperties(4, 0.3F, true))
+                .component(
+                    DataComponents.EQUIPPABLE,
+                    Equippable.builder(EquipmentSlot.HEAD)
+                        .setSwappable(false)
+                        .setEquipSound(Holder.direct(SoundEvents.VILLAGER_AMBIENT))
+                        .build())));
+    public static final RegistrationHandle<Item, PhoneItem> PHONE = RegistryService.get()
+        .registerItem(Constants.id("phone"), () -> new PhoneItem(properties("phone")));
 
     private ModItems() {
     }

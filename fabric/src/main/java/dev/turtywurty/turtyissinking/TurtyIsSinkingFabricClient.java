@@ -10,6 +10,7 @@ public class TurtyIsSinkingFabricClient implements ClientModInitializer {
     public void onInitializeClient() {
         TurtyIsSinkingClient.init();
 
-        ClientSendMessageEvents.MODIFY_CHAT.register(message -> ChatLimits.truncateChatMessage(Uwuifier.DEFAULT.uwuify(message)));
+        ClientSendMessageEvents.MODIFY_CHAT
+            .register(message -> ChatLimits.truncateChatMessage(Uwuifier.DEFAULT.uwuify(message)));
     }
 }

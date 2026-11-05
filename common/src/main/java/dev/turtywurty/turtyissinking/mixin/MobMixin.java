@@ -11,11 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Mob.class)
 public class MobMixin {
-    @Inject(
-            method = "createNavigation",
-            at = @At("HEAD"),
-            cancellable = true
-    )
+    @Inject(method = "createNavigation", at = @At("HEAD"), cancellable = true)
     private void turtyissinking$createNavigation(CallbackInfoReturnable<PathNavigation> callbackInfoReturnable) {
         if ((Object) this instanceof IronGolem ironGolem) {
             callbackInfoReturnable.setReturnValue(new WallClimberNavigation(ironGolem, ironGolem.level()));

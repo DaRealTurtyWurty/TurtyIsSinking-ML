@@ -9,17 +9,17 @@ import dev.turtywurty.turtymultiloader.datagen.convention.ConventionTags;
 
 public final class ModDataGeneration {
     public static final DataGenerationSpec SPEC = DataGeneration.spec(Constants.MOD_ID)
-            .recipes((recipes, advancements) -> {
-                new TurtyIsSinkingRecipeProvider(recipes, advancements).buildRecipes();
-                new TurtyIsSinkingAdvancementProvider().run(advancements);
-            })
-            .itemTags((_, tags) -> tags.tag(ModTags.Items.CONTAINS_LACTOSE)
-                    .addOptionalTag(ConventionTags.item("drinks/milk").key()))
-            .language("en_us", TurtyIsSinkingEnglishLanguageProvider::generate)
-            .models(TurtyIsSinkingModelProvider::generate)
-            .provider(DataGenerationSide.CLIENT,
-                    context -> new TurtyIsSinkingSoundDefinitionProvider(context.output()))
-            .build();
+        .recipes((recipes, advancements) -> {
+            new TurtyIsSinkingRecipeProvider(recipes, advancements).buildRecipes();
+            new TurtyIsSinkingAdvancementProvider().run(advancements);
+        })
+        .itemTags((_, tags) -> tags.tag(ModTags.Items.CONTAINS_LACTOSE)
+            .addOptionalTag(ConventionTags.item("drinks/milk").key()))
+        .language("en_us", TurtyIsSinkingEnglishLanguageProvider::generate)
+        .models(TurtyIsSinkingModelProvider::generate)
+        .provider(DataGenerationSide.CLIENT,
+            context -> new TurtyIsSinkingSoundDefinitionProvider(context.output()))
+        .build();
 
     private ModDataGeneration() {
     }

@@ -12,7 +12,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MouseHandler.class)
 public class MouseHandlerMixin {
     @Inject(method = "onMove", at = @At("HEAD"))
-    private void turtyissinking$onMove(long handle, double xpos, double ypos, double xrel, double yrel, CallbackInfo ci) {
+    private void turtyissinking$onMove(
+        long handle,
+        double xpos,
+        double ypos,
+        double xrel,
+        double yrel,
+        CallbackInfo ci
+    ) {
         ClientAfkTracker.markActive();
     }
 

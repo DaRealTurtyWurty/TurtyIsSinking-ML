@@ -11,13 +11,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(VillagerRenderer.class)
 public class VillagerRendererMixin {
-    @Inject(
-            method = "extractRenderState(Lnet/minecraft/world/entity/npc/villager/Villager;Lnet/minecraft/client/renderer/entity/state/VillagerRenderState;F)V",
-            at = @At("TAIL")
-    )
-    private void turtyissinking$extractRenderState(Villager entity, VillagerRenderState state, float partialTicks, CallbackInfo callbackInfo) {
-        if (state instanceof SnippableVillager snippableVillagerState && entity instanceof SnippableVillager snippableVillagerEntity) {
-            snippableVillagerState.turtyissinking$setNoseSnipped(snippableVillagerEntity.turtyissinking$hasSnippedNose());
+    @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/npc/villager/Villager;Lnet/minecraft/client/renderer/entity/state/VillagerRenderState;F)V", at = @At("TAIL"))
+    private void turtyissinking$extractRenderState(
+        Villager entity,
+        VillagerRenderState state,
+        float partialTicks,
+        CallbackInfo callbackInfo
+    ) {
+        if (state instanceof SnippableVillager snippableVillagerState
+            && entity instanceof SnippableVillager snippableVillagerEntity) {
+            snippableVillagerState
+                .turtyissinking$setNoseSnipped(snippableVillagerEntity.turtyissinking$hasSnippedNose());
         }
     }
 }

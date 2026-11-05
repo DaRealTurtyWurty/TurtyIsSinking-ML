@@ -9,39 +9,40 @@ import java.util.regex.Pattern;
 public class Uwuifier {
     public static final Uwuifier DEFAULT = new Uwuifier();
     public static final List<String> FACES = Arrays.asList(
-            "(・`ω´・)",
-            ";;w;;",
-            "OwO",
-            "UwU",
-            ">w<",
-            "^w^",
-            "ÚwÚ",
-            "^-^",
-            ":3",
-            "x3"
-    );
+        "(・`ω´・)",
+        ";;w;;",
+        "OwO",
+        "UwU",
+        ">w<",
+        "^w^",
+        "ÚwÚ",
+        "^-^",
+        ":3",
+        "x3");
     public static final List<String> EXCLAMATIONS = Arrays.asList("!?", "?!!", "?!?1", "!!11", "?!?!");
     public static final List<String> ACTIONS = Arrays.asList(
-            "*blushes*",
-            "*whispers to self*",
-            "*cries*",
-            "*screams*",
-            "*sweats*",
-            "*twerks*",
-            "*runs away*",
-            "*screeches*",
-            "*walks away*",
-            "*sees bulge*",
-            "*looks at you*",
-            "*notices buldge*",
-            "*starts twerking*",
-            "*huggles tightly*",
-            "*boops your nose*"
-    );
+        "*blushes*",
+        "*whispers to self*",
+        "*cries*",
+        "*screams*",
+        "*sweats*",
+        "*twerks*",
+        "*runs away*",
+        "*screeches*",
+        "*walks away*",
+        "*sees bulge*",
+        "*looks at you*",
+        "*notices buldge*",
+        "*starts twerking*",
+        "*huggles tightly*",
+        "*boops your nose*");
     private static final Pattern EXCLAMATION_PATTERN = Pattern.compile("[?!]+$");
-    private static final Pattern URI_ILLEGAL_CHARACTER_PATTERN = Pattern.compile("[^a-z0-9:/?#\\[\\]@!$&'()*+,;=.\\-_~%]", Pattern.CASE_INSENSITIVE);
-    private static final Pattern URI_BAD_ESCAPE_PATTERN = Pattern.compile("%[^0-9a-f]|%[0-9a-f](?:[^0-9a-f]|$)", Pattern.CASE_INSENSITIVE);
-    private static final Pattern URI_PATTERN = Pattern.compile("(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*)(?:\\?([^#]*))?(?:#(.*))?");
+    private static final Pattern URI_ILLEGAL_CHARACTER_PATTERN = Pattern
+        .compile("[^a-z0-9:/?#\\[\\]@!$&'()*+,;=.\\-_~%]", Pattern.CASE_INSENSITIVE);
+    private static final Pattern URI_BAD_ESCAPE_PATTERN = Pattern.compile("%[^0-9a-f]|%[0-9a-f](?:[^0-9a-f]|$)",
+        Pattern.CASE_INSENSITIVE);
+    private static final Pattern URI_PATTERN = Pattern
+        .compile("(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*)(?:\\?([^#]*))?(?:#(.*))?");
     private static final Pattern SCHEME_PATTERN = Pattern.compile("^[a-z][a-z0-9+\\-.]*$");
     private static final Pattern LETTER_PATTERN = Pattern.compile("^[a-zA-Z]$");
     private static final Pattern SENTENCE_END_PATTERN = Pattern.compile("[.!?\\-]");
@@ -55,7 +56,8 @@ public class Uwuifier {
 
     public Uwuifier(SpacesModifier spacesModifier, double wordsModifier, double exclamationsModifier) {
         this.spacesModifier = spacesModifier == null ? SpacesModifier.DEFAULT : spacesModifier;
-        validateModifier(this.spacesModifier.faces() + this.spacesModifier.actions() + this.spacesModifier.stutters(), "spaces");
+        validateModifier(this.spacesModifier.faces() + this.spacesModifier.actions() + this.spacesModifier.stutters(),
+            "spaces");
         validateModifier(wordsModifier, "words");
         validateModifier(exclamationsModifier, "exclamations");
         this.wordsModifier = wordsModifier;

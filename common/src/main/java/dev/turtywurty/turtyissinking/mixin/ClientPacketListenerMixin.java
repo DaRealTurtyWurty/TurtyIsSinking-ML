@@ -25,13 +25,7 @@ public class ClientPacketListenerMixin {
     @Unique
     private FadableSimpleSoundInstance turtyissinking$thunderSoundInstance;
 
-    @Inject(
-            method = "handleGameEvent",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/multiplayer/ClientLevel;setThunderLevel(F)V"
-            )
-    )
+    @Inject(method = "handleGameEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientLevel;setThunderLevel(F)V"))
     private void turtyissinking$handleGameEvent(ClientboundGameEventPacket packet, CallbackInfo callbackInfo) {
         Minecraft minecraft = Minecraft.getInstance();
         SoundManager soundManager = minecraft.getSoundManager();
@@ -62,7 +56,8 @@ public class ClientPacketListenerMixin {
         }
 
         if (minecraft.player != null) {
-            turtyissinking$thunderSoundInstance = new FadableSimpleSoundInstance(ModSounds.THUNDER.get(), SoundSource.WEATHER, 1.0f, 1.0f, this.level.getRandom(), minecraft.player.blockPosition());
+            turtyissinking$thunderSoundInstance = new FadableSimpleSoundInstance(ModSounds.THUNDER.get(),
+                SoundSource.WEATHER, 1.0f, 1.0f, this.level.getRandom(), minecraft.player.blockPosition());
             turtyissinking$thunderSoundInstance.fadeIn();
             soundManager.play(turtyissinking$thunderSoundInstance);
             Constants.LOG.info("Fading in thunder sound");

@@ -13,19 +13,19 @@ import java.util.Map;
 
 public final class ModAttachments {
     public static final AttachmentType<Boolean> ZOMBIE_67ING = Attachments.register(
-            Constants.id("zombie_67ing"), builder -> builder.defaultFactory(() -> false)
-                    .syncToTrackers(ByteBufCodecs.BOOL));
+        Constants.id("zombie_67ing"), builder -> builder.defaultFactory(() -> false)
+            .syncToTrackers(ByteBufCodecs.BOOL));
 
     public static final AttachmentType<Boolean> VILLAGER_NOSE_SNIPPED = Attachments.register(
-            Constants.id("villager_nose_snipped"), builder -> builder.defaultFactory(() -> false)
-                    .persistent(Codec.BOOL)
-                    .syncToTrackers(ByteBufCodecs.BOOL));
+        Constants.id("villager_nose_snipped"), builder -> builder.defaultFactory(() -> false)
+            .persistent(Codec.BOOL)
+            .syncToTrackers(ByteBufCodecs.BOOL));
 
     public static final AttachmentType<Map<Identifier, Boolean>> ALLERGIC_ITEMS = Attachments.register(
-            Constants.id("allergic_items"), builder -> builder.defaultFactory(AllergyUtils::getDefaultAllergyFoods)
-                    .persistent(Codec.unboundedMap(AllergyUtils.IDENTIFIER_CODEC, Codec.BOOL)
-                            .xmap(HashMap::new, Map::copyOf))
-                    .copyOnDeath());
+        Constants.id("allergic_items"), builder -> builder.defaultFactory(AllergyUtils::getDefaultAllergyFoods)
+            .persistent(Codec.unboundedMap(AllergyUtils.IDENTIFIER_CODEC, Codec.BOOL)
+                .xmap(HashMap::new, Map::copyOf))
+            .copyOnDeath());
 
     private ModAttachments() {
     }

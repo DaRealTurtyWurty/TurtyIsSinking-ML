@@ -26,31 +26,29 @@ import java.util.Objects;
 
 @Mixin(Item.class)
 public class ItemMixin {
-    @Inject(
-            method = "finishUsingItem",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/ItemStack;get(Lnet/minecraft/core/component/DataComponentType;)Ljava/lang/Object;",
-                    shift = At.Shift.AFTER
-            )
-    )
-    private void turtyissinking$finishUsingItem(ItemStack itemStack, Level level, LivingEntity entity, CallbackInfoReturnable<ItemStack> cir) {
+    @Inject(method = "finishUsingItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;get(Lnet/minecraft/core/component/DataComponentType;)Ljava/lang/Object;", shift = At.Shift.AFTER))
+    private void turtyissinking$finishUsingItem(
+        ItemStack itemStack,
+        Level level,
+        LivingEntity entity,
+        CallbackInfoReturnable<ItemStack> cir
+    ) {
         turtyissinking$handleLactoseIntolerance(itemStack, level, entity);
         turtyissinking$handleAllergies(itemStack, level, entity);
     }
 
-    @Inject(
-            method = "use",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/component/Consumable;startConsuming(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
-            ),
-            cancellable = true
-    )
-    private void turtyissinking$use(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir, @Local(name = "stack") ItemStack stack) {
+    @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/component/Consumable;startConsuming(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"), cancellable = true)
+    private void turtyissinking$use(
+        Level level,
+        Player player,
+        InteractionHand hand,
+        CallbackInfoReturnable<InteractionResult> cir,
+        @Local(name = "stack") ItemStack stack
+    ) {
         String countryCode = IPUtils.getCountryCodeFromExternalIP();
         if (Objects.equals(countryCode, "IE")) {
-            boolean isPotato = stack.is(Items.POTATO) || stack.is(Items.BAKED_POTATO) || stack.is(Items.POISONOUS_POTATO);
+            boolean isPotato = stack.is(Items.POTATO) || stack.is(Items.BAKED_POTATO)
+                || stack.is(Items.POISONOUS_POTATO);
             if (!isPotato) {
                 cir.setReturnValue(InteractionResult.FAIL);
             }

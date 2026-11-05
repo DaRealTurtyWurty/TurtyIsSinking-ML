@@ -37,3 +37,19 @@ Either loader generates the shared resources in `common/src/generated/resources`
 
 The NeoForge task runs client and server datagen into separate build directories, then merges them into common
 resources. Run the loader commands sequentially because they write the same destination.
+
+## Code quality
+
+Railroad's quality plugin (`dev.railroadide.quality:1.0.0`) is resolved from
+`https://maven.railroadide.dev/releases`. No local plugin checkout is required.
+
+```powershell
+.\gradlew.bat format
+.\gradlew.bat formatCheck
+.\gradlew.bat javadocCoverage
+```
+
+The root commands cover all three modules, and formatting also covers the root and `build-logic` Gradle scripts.
+`check` and `build` enforce formatting. Javadoc reports are generated at
+`<module>/build/reports/javadoc-coverage/index.html`; documentation coverage is informational unless you explicitly
+run `javadocCoverageCheck`.

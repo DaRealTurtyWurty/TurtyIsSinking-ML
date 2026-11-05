@@ -26,16 +26,16 @@ public class ServerPlayerGameModeMixin {
     @Final
     protected ServerPlayer player;
 
-    @Inject(
-            method = "handleBlockBreakAction",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/block/state/BlockState;isAir()Z",
-                    ordinal = 0
-            ),
-            cancellable = true
-    )
-    private void turtyissinking$handleBlockBreakAction(BlockPos pos, ServerboundPlayerActionPacket.Action action, Direction direction, int maxY, int sequence, CallbackInfo callbackInfo, @Local(name = "blockState") BlockState blockState) {
+    @Inject(method = "handleBlockBreakAction", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;isAir()Z", ordinal = 0), cancellable = true)
+    private void turtyissinking$handleBlockBreakAction(
+        BlockPos pos,
+        ServerboundPlayerActionPacket.Action action,
+        Direction direction,
+        int maxY,
+        int sequence,
+        CallbackInfo callbackInfo,
+        @Local(name = "blockState") BlockState blockState
+    ) {
         ModCriteria.PUNCH_BLOCK.get().trigger(this.player, pos);
 
         if (blockState.is(Blocks.OBSIDIAN)) {

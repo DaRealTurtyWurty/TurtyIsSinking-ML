@@ -14,13 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(JukeboxBlockEntity.class)
 public class JukeboxBlockEntityMixin {
-    @Inject(
-            method = "itemChanged",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/JukeboxSongPlayer;play(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/Holder;)V"
-            )
-    )
+    @Inject(method = "itemChanged", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/JukeboxSongPlayer;play(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/Holder;)V"))
     private void turtyissinking$syncReverseJukebox(CallbackInfo callbackInfo) {
         JukeboxBlockEntity jukebox = (JukeboxBlockEntity) (Object) this;
         if (!(jukebox.getLevel() instanceof ServerLevel level))

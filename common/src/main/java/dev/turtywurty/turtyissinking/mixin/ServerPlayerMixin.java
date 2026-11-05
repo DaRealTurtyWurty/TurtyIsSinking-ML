@@ -10,13 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ServerPlayer.class)
 public class ServerPlayerMixin {
-    @Inject(
-            method = "setGameMode",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/network/ServerGamePacketListenerImpl;send(Lnet/minecraft/network/protocol/Packet;)V"
-            )
-    )
+    @Inject(method = "setGameMode", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerGamePacketListenerImpl;send(Lnet/minecraft/network/protocol/Packet;)V"))
     private void turtyissinking$setGameMode(GameType mode, CallbackInfoReturnable<Boolean> callbackInfo) {
         ModCriteria.GAMEMODE.get().trigger((ServerPlayer) (Object) this);
     }

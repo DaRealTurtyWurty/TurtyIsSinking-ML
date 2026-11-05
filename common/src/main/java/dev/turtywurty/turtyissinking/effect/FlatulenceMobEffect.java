@@ -39,7 +39,8 @@ public class FlatulenceMobEffect extends MobEffect {
         serverLevel.playSound(null, mob, ModSounds.FART.get(), SoundSource.NEUTRAL, volume, pitch);
 
         if (amplification >= 5 && serverLevel.getRandom().nextInt(Math.max(1, 10 / (amplification - 4))) == 0) {
-            Containers.dropItemStack(serverLevel, mob.getX(), mob.getY(), mob.getZ(), new ItemStack(ModItems.POOP.get()));
+            Containers.dropItemStack(serverLevel, mob.getX(), mob.getY(), mob.getZ(),
+                new ItemStack(ModItems.POOP.get()));
         }
 
         return true;

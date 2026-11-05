@@ -43,12 +43,11 @@ public class ADHDMobEffect extends MobEffect {
     private static void syncLook(LivingEntity mob) {
         if (mob instanceof ServerPlayer player) {
             player.connection.teleport(
-                    player.getX(),
-                    player.getY(),
-                    player.getZ(),
-                    player.getYRot(),
-                    player.getXRot()
-            );
+                player.getX(),
+                player.getY(),
+                player.getZ(),
+                player.getYRot(),
+                player.getXRot());
         }
     }
 
@@ -92,20 +91,18 @@ public class ADHDMobEffect extends MobEffect {
 
     private boolean handleMove(LivingEntity mob) {
         mob.setDeltaMovement(mob.getDeltaMovement().add(
-                (this.random.nextFloat() - 0.5f) * 0.2f,
-                0,
-                (this.random.nextFloat() - 0.5f) * 0.2f
-        ));
+            (this.random.nextFloat() - 0.5f) * 0.2f,
+            0,
+            (this.random.nextFloat() - 0.5f) * 0.2f));
         syncMovement(mob);
         return true;
     }
 
     private boolean handleLookAround(LivingEntity mob) {
         Vec3 randLook = mob.getEyePosition().add(
-                (this.random.nextFloat() - 0.5f) * 4,
-                (this.random.nextFloat() - 0.5f) * 2,
-                (this.random.nextFloat() - 0.5f) * 4
-        );
+            (this.random.nextFloat() - 0.5f) * 4,
+            (this.random.nextFloat() - 0.5f) * 2,
+            (this.random.nextFloat() - 0.5f) * 4);
 
         mob.lookAt(EntityAnchorArgument.Anchor.EYES, randLook);
         syncLook(mob);
@@ -135,17 +132,16 @@ public class ADHDMobEffect extends MobEffect {
             Vec3 end = start.add(player.getLookAngle().scale(5.0D));
 
             AABB searchBox = player.getBoundingBox()
-                    .expandTowards(player.getLookAngle().scale(5.0D))
-                    .inflate(1.0D);
+                .expandTowards(player.getLookAngle().scale(5.0D))
+                .inflate(1.0D);
 
             EntityHitResult entityHit = ProjectileUtil.getEntityHitResult(
-                    player,
-                    start,
-                    end,
-                    searchBox,
-                    entity -> entity.isPickable() && entity != player,
-                    5.0D * 5.0D
-            );
+                player,
+                start,
+                end,
+                searchBox,
+                entity -> entity.isPickable() && entity != player,
+                5.0D * 5.0D);
 
             if (entityHit != null) {
                 Entity target = entityHit.getEntity();
@@ -160,26 +156,25 @@ public class ADHDMobEffect extends MobEffect {
 
             // then blocks
             BlockHitResult blockHitResult = serverLevel.clip(new ClipContext(
-                    start, end,
-                    ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE,
-                    mob));
-            if (blockHitResult.getType() != BlockHitResult.Type.MISS && player.mayInteract(serverLevel, blockHitResult.getBlockPos())) {
+                start, end,
+                ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE,
+                mob));
+            if (blockHitResult.getType() != BlockHitResult.Type.MISS
+                && player.mayInteract(serverLevel, blockHitResult.getBlockPos())) {
                 InteractionResult result = player.gameMode.useItemOn(
-                        player,
-                        serverLevel,
-                        player.getItemInHand(InteractionHand.MAIN_HAND),
-                        InteractionHand.MAIN_HAND,
-                        blockHitResult
-                );
+                    player,
+                    serverLevel,
+                    player.getItemInHand(InteractionHand.MAIN_HAND),
+                    InteractionHand.MAIN_HAND,
+                    blockHitResult);
 
                 if (!result.consumesAction()) {
                     player.gameMode.useItemOn(
-                            player,
-                            serverLevel,
-                            player.getItemInHand(InteractionHand.OFF_HAND),
-                            InteractionHand.OFF_HAND,
-                            blockHitResult
-                    );
+                        player,
+                        serverLevel,
+                        player.getItemInHand(InteractionHand.OFF_HAND),
+                        InteractionHand.OFF_HAND,
+                        blockHitResult);
                 }
 
                 return true;
@@ -213,17 +208,16 @@ public class ADHDMobEffect extends MobEffect {
             Vec3 end = start.add(player.getLookAngle().scale(5.0D));
 
             AABB searchBox = player.getBoundingBox()
-                    .expandTowards(player.getLookAngle().scale(5.0D))
-                    .inflate(1.0D);
+                .expandTowards(player.getLookAngle().scale(5.0D))
+                .inflate(1.0D);
 
             EntityHitResult entityHit = ProjectileUtil.getEntityHitResult(
-                    player,
-                    start,
-                    end,
-                    searchBox,
-                    entity -> entity.isAttackable() && entity != player,
-                    5.0D * 5.0D
-            );
+                player,
+                start,
+                end,
+                searchBox,
+                entity -> entity.isAttackable() && entity != player,
+                5.0D * 5.0D);
 
             if (entityHit != null) {
                 player.attack(entityHit.getEntity());
@@ -232,19 +226,18 @@ public class ADHDMobEffect extends MobEffect {
             }
 
             BlockHitResult blockHitResult = serverLevel.clip(new ClipContext(
-                    start, end,
-                    ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE,
-                    player));
+                start, end,
+                ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE,
+                player));
 
             if (blockHitResult.getType() != BlockHitResult.Type.MISS) {
                 Direction direction = blockHitResult.getDirection();
                 player.gameMode.handleBlockBreakAction(
-                        blockHitResult.getBlockPos(),
-                        ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK,
-                        direction,
-                        serverLevel.getMaxY(),
-                        0
-                );
+                    blockHitResult.getBlockPos(),
+                    ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK,
+                    direction,
+                    serverLevel.getMaxY(),
+                    0);
                 player.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, true);
                 return true;
             }

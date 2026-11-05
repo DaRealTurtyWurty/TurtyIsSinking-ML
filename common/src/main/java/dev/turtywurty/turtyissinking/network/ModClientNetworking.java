@@ -14,10 +14,10 @@ public final class ModClientNetworking {
     public static void register() {
         NetworkService network = NetworkService.get();
         network.registerClientHandler(PayloadPhase.PLAY, ClientboundOpenAgeVerificationScreenPacket.TYPE,
-                (_, _) -> Minecraft.getInstance().setScreenAndShow(new AgeVerificationScreen()));
+            (_, _) -> Minecraft.getInstance().setScreenAndShow(new AgeVerificationScreen()));
         network.registerClientHandler(PayloadPhase.PLAY, ClientboundOpenPhoneScreenPacket.TYPE,
-                (_, _) -> Minecraft.getInstance().setScreenAndShow(new PhoneCallScreen()));
+            (_, _) -> Minecraft.getInstance().setScreenAndShow(new PhoneCallScreen()));
         network.registerClientHandler(PayloadPhase.PLAY, ClientboundReverseJukeboxPacket.TYPE,
-                (payload, _) -> ReversedJukeboxTracker.setReversed(payload.pos(), payload.reversed()));
+            (payload, _) -> ReversedJukeboxTracker.setReversed(payload.pos(), payload.reversed()));
     }
 }

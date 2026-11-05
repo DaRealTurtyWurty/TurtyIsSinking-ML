@@ -20,10 +20,7 @@ public abstract class IronGolemMixin extends AbstractGolem implements Climbable 
         super(type, level);
     }
 
-    @Inject(
-            method = "aiStep",
-            at = @At("TAIL")
-    )
+    @Inject(method = "aiStep", at = @At("TAIL"))
     private void turtyissinking$aiStep(CallbackInfo callbackInfo) {
         if (!level().isClientSide()) {
             turtyissinking$setClimbing(this.horizontalCollision);

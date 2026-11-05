@@ -29,19 +29,18 @@ public final class AllergyUtils {
     public static final Component ALLERGY_MESSAGE = Component.translatable(Constants.MOD_ID + ".allergy.message");
 
     public static final Map<Holder<MobEffect>, Float> ALLERGIC_REACTIONS = Map.of(
-            MobEffects.NAUSEA, 0.95F,
-            MobEffects.WEAKNESS, 0.85F,
-            MobEffects.MINING_FATIGUE, 0.75F,
-            MobEffects.HUNGER, 0.65F,
-            MobEffects.WITHER, 0.20F,
-            MobEffects.INSTANT_DAMAGE, 0.01F
-    );
+        MobEffects.NAUSEA, 0.95F,
+        MobEffects.WEAKNESS, 0.85F,
+        MobEffects.MINING_FATIGUE, 0.75F,
+        MobEffects.HUNGER, 0.65F,
+        MobEffects.WITHER, 0.20F,
+        MobEffects.INSTANT_DAMAGE, 0.01F);
     public static final Codec<Identifier> IDENTIFIER_CODEC = Codec.STRING.comapFlatMap(
-            value -> {
-                Identifier id = Identifier.tryParse(value);
-                return id != null ? DataResult.success(id) : DataResult.error(() -> "Invalid identifier: " + value);
-            },
-            Identifier::toString);
+        value -> {
+            Identifier id = Identifier.tryParse(value);
+            return id != null ? DataResult.success(id) : DataResult.error(() -> "Invalid identifier: " + value);
+        },
+        Identifier::toString);
 
     private AllergyUtils() {
     }
@@ -103,25 +102,22 @@ public final class AllergyUtils {
 
     public static @NonNull List<MobEffectInstance> getAllergyEffects(RandomSource randomSource) {
         return List.copyOf(ALLERGIC_REACTIONS.entrySet())
-                .stream()
-                .filter(entry -> randomSource.nextFloat() < entry.getValue())
-                .map(Map.Entry::getKey)
-                .map(effect -> {
-                    if (effect == MobEffects.INSTANT_DAMAGE) {
-                        return new MobEffectInstance(
-                                effect,
-                                5,
-                                100
-                        );
-                    } else {
-                        return new MobEffectInstance(
-                                effect,
-                                randomSource.nextInt(20 * 30, 20 * 60 * 10),
-                                randomSource.nextInt(0, 5)
-                        );
-                    }
-                })
-                .toList();
+            .stream()
+            .filter(entry -> randomSource.nextFloat() < entry.getValue())
+            .map(Map.Entry::getKey)
+            .map(effect -> {
+                if (effect == MobEffects.INSTANT_DAMAGE)
+                    return new MobEffectInstance(
+                        effect,
+                        5,
+                        100);
+                else
+                    return new MobEffectInstance(
+                        effect,
+                        randomSource.nextInt(20 * 30, 20 * 60 * 10),
+                        randomSource.nextInt(0, 5));
+            })
+            .toList();
     }
 
     public static boolean hasAllergicReaction(Level level) {

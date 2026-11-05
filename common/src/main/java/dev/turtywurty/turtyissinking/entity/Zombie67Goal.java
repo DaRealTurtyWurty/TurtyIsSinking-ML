@@ -88,7 +88,8 @@ public class Zombie67Goal extends ZombieAttackGoal {
             this.mob.getNavigation().stop();
             this.phase = Phase.STARING;
             this.stareTicks = STARE_TICKS;
-            this.mob.level().playSound(null, this.mob, ModSounds.BABY_ZOMBIE_SIX_SEVEN.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
+            this.mob.level().playSound(null, this.mob, ModSounds.BABY_ZOMBIE_SIX_SEVEN.get(), SoundSource.HOSTILE, 1.0F,
+                1.0F);
             return;
         }
 

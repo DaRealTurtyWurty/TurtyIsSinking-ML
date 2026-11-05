@@ -20,7 +20,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity {
     @Unique
-    private static final Component TURTYISSINKING$NO_LITTERING_MESSAGE = Component.translatable("message.turtyissinking.no_littering");
+    private static final Component TURTYISSINKING$NO_LITTERING_MESSAGE = Component
+        .translatable("message.turtyissinking.no_littering");
 
     @Unique
     private static final int TURTYISSINKING$RISE_TICKS = 24;
@@ -50,10 +51,7 @@ public abstract class ItemEntityMixin extends Entity {
         super(type, level);
     }
 
-    @Inject(
-            method = "tick",
-            at = @At("TAIL")
-    )
+    @Inject(method = "tick", at = @At("TAIL"))
     private void turtyissinking$tick(CallbackInfo ci) {
         if (level().isClientSide())
             return;
@@ -77,7 +75,8 @@ public abstract class ItemEntityMixin extends Entity {
             if (!isInWater())
                 return;
 
-            turtyissinking$attackTrident = new ThrownTrident(level(), getX(), getY(), getZ(), Items.TRIDENT.getDefaultInstance());
+            turtyissinking$attackTrident = new ThrownTrident(level(), getX(), getY(), getZ(),
+                Items.TRIDENT.getDefaultInstance());
             turtyissinking$attackTrident.setNoPhysics(true);
             turtyissinking$attackTrident.setNoGravity(true);
             turtyissinking$attackTrident.setDeltaMovement(Vec3.ZERO);
@@ -132,8 +131,10 @@ public abstract class ItemEntityMixin extends Entity {
         float targetYaw = (float) (Mth.atan2(direction.z, direction.x) * Mth.RAD_TO_DEG) - 90.0F;
         float targetPitch = (float) -(Mth.atan2(direction.y, horizontalDistance) * Mth.RAD_TO_DEG);
 
-        turtyissinking$attackTrident.setYRot(turtyissinking$approachRotation(turtyissinking$attackTrident.getYRot(), targetYaw));
-        turtyissinking$attackTrident.setXRot(turtyissinking$approachRotation(turtyissinking$attackTrident.getXRot(), targetPitch));
+        turtyissinking$attackTrident
+            .setYRot(turtyissinking$approachRotation(turtyissinking$attackTrident.getYRot(), targetYaw));
+        turtyissinking$attackTrident
+            .setXRot(turtyissinking$approachRotation(turtyissinking$attackTrident.getXRot(), targetPitch));
     }
 
     @Unique
