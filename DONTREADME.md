@@ -9,7 +9,7 @@ What's in the mod:
 - If you punch obsidian, it turns into crying obsidian
 - You can now shear villager's noses, eat them, and wear them
 - Music discs named "dinnerbone" play music in reverse
-- You can only eat potatoes if you're in ireland
+- If you're in Ireland, you can only eat potatoes
 - If you throw an item in water (litter) a trident will fly up in the air and then hurdle towards you
 - Standing still for >30 seconds causes you to get the ADHD effect, which makes you perform random actions
 - Chat messages now get uwu-ified
