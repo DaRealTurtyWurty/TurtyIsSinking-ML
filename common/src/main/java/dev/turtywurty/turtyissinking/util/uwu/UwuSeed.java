@@ -16,6 +16,41 @@ public final class UwuSeed {
         this.seeder = generateSeeder(this.seed);
     }
 
+    private static double generateRange(double value, double min, double max) {
+        if (min > max)
+            throw new IllegalArgumentException("The minimum value must be below the maximum value");
+
+        if (min == max)
+            throw new IllegalArgumentException("The minimum value cannot equal the maximum value");
+
+        if (min == 0 && max == 1)
+            return value;
+
+        return value * (max - min) + min;
+    }
+
+    private static IntSupplier generateSeeder(String seed) {
+        int h = 1779033703 ^ seed.length();
+        for (int i = 0; i < seed.length(); i++) {
+            h = (h ^ seed.charAt(i)) * (int) 3432918353L;
+            h = (h << 13) | (h >>> 19);
+        }
+
+        final int[] state = {h};
+        return () -> {
+            int next = state[0];
+            next = (next ^ (next >>> 16)) * (int) 2246822507L;
+            next = (next ^ (next >>> 13)) * (int) 3266489909L;
+            next ^= next >>> 16;
+            state[0] = next;
+            return next;
+        };
+    }
+
+    private static double unsignedRatio(int value) {
+        return Integer.toUnsignedLong(value) / 4294967296.0;
+    }
+
     public String getSeed() {
         return seed;
     }
@@ -116,40 +151,5 @@ public final class UwuSeed {
         d = (d << 11) | (d >>> 21);
 
         return generateRange(unsignedRatio(r), min, max);
-    }
-
-    private static double generateRange(double value, double min, double max) {
-        if (min > max)
-            throw new IllegalArgumentException("The minimum value must be below the maximum value");
-
-        if (min == max)
-            throw new IllegalArgumentException("The minimum value cannot equal the maximum value");
-
-        if (min == 0 && max == 1)
-            return value;
-
-        return value * (max - min) + min;
-    }
-
-    private static IntSupplier generateSeeder(String seed) {
-        int h = 1779033703 ^ seed.length();
-        for (int i = 0; i < seed.length(); i++) {
-            h = (h ^ seed.charAt(i)) * (int) 3432918353L;
-            h = (h << 13) | (h >>> 19);
-        }
-
-        final int[] state = {h};
-        return () -> {
-            int next = state[0];
-            next = (next ^ (next >>> 16)) * (int) 2246822507L;
-            next = (next ^ (next >>> 13)) * (int) 3266489909L;
-            next ^= next >>> 16;
-            state[0] = next;
-            return next;
-        };
-    }
-
-    private static double unsignedRatio(int value) {
-        return Integer.toUnsignedLong(value) / 4294967296.0;
     }
 }

@@ -18,12 +18,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPacketListener.class)
 public class ClientPacketListenerMixin {
-    @Shadow
-    private ClientLevel level;
-
     @Unique
     private static final float turtyissinking$THUNDER_SOUND_THRESHOLD = 0.1F;
-
+    @Shadow
+    private ClientLevel level;
     @Unique
     private FadableSimpleSoundInstance turtyissinking$thunderSoundInstance;
 

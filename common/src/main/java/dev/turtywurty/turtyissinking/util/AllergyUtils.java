@@ -3,6 +3,8 @@ package dev.turtywurty.turtyissinking.util;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import dev.turtywurty.turtyissinking.Constants;
+import dev.turtywurty.turtyissinking.init.ModAttachments;
+import dev.turtywurty.turtymultiloader.attachment.AttachmentTarget;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -54,6 +56,20 @@ public final class AllergyUtils {
 
         Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
         return hasDeterministicChance(level.getSeed(), player.getUUID(), itemId);
+    }
+
+    public static boolean isAllergic(Player player, Item item) {
+        if (!(player.level() instanceof ServerLevel level))
+            return false;
+
+        var target = AttachmentTarget.entity(player);
+        Map<Identifier, Boolean> allergies = target.getOrCreate(ModAttachments.ALLERGIC_ITEMS);
+        Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
+        boolean allergic = isAllergicTo(level, player, item);
+        if (!Boolean.valueOf(allergic).equals(allergies.get(itemId))) {
+            target.mutate(ModAttachments.ALLERGIC_ITEMS, values -> values.put(itemId, allergic));
+        }
+        return allergic;
     }
 
     public static boolean hasDeterministicChance(long worldSeed, UUID playerUuid, Identifier itemId) {

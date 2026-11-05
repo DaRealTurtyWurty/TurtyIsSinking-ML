@@ -1,11 +1,11 @@
 package dev.turtywurty.turtyissinking.mixin;
 
 import dev.turtywurty.turtyissinking.network.ClientboundReverseJukeboxPacket;
-import dev.turtywurty.turtyissinking.platform.Services;
+import dev.turtywurty.turtymultiloader.network.NetworkService;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,13 +23,12 @@ public class JukeboxBlockEntityMixin {
     )
     private void turtyissinking$syncReverseJukebox(ItemStack itemStack, CallbackInfo callbackInfo) {
         JukeboxBlockEntity jukebox = (JukeboxBlockEntity) (Object) this;
-        Level level = jukebox.getLevel();
-        if (level == null || level.isClientSide())
+        if (!(jukebox.getLevel() instanceof ServerLevel level))
             return;
 
         Component customName = itemStack.getCustomName();
         boolean reversed = customName != null && customName.getString().equalsIgnoreCase("dinnerbone");
         BlockPos pos = jukebox.getBlockPos();
-        Services.NETWORK.sendToAll(level, new ClientboundReverseJukeboxPacket(pos, reversed));
+        NetworkService.get().sendToDimension(level, new ClientboundReverseJukeboxPacket(pos, reversed));
     }
 }

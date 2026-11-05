@@ -3,6 +3,11 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
+dependencies {
+    implementation("dev.turtywurty.turtymultiloader:turtymultiloader-neoforge:${turtymultiloader_version}")
+    jarJar("dev.turtywurty.turtymultiloader:turtymultiloader-neoforge:[${turtymultiloader_version}]")
+}
+
 neoForge {
     version = neoforge_version
     def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -22,8 +27,15 @@ neoForge {
             clientData()
             gameDirectory = this.mkdir(this.file('runs/data'))
             programArguments.addAll '--mod', project.mod_id, '--all',
-                    '--output', rootProject.project(':common').file('src/generated/resources/').getAbsolutePath(),
+                    '--output', layout.buildDirectory.dir('datagen/client').get().asFile.absolutePath,
                     '--existing', rootProject.project(':common').file('src/main/resources/').getAbsolutePath()
+        }
+        serverData {
+            serverData()
+            gameDirectory = file('runs/serverDatagen')
+            programArguments.addAll '--mod', project.mod_id, '--all',
+                    '--output', layout.buildDirectory.dir('datagen/server').get().asFile.absolutePath,
+                    '--existing', rootProject.project(':common').file('src/main/resources').absolutePath
         }
         server {
             server()
@@ -36,6 +48,16 @@ neoForge {
             sourceSet sourceSets.main
         }
     }
+}
+
+tasks.register('runDatagen', Sync) {
+    group = 'data generation'
+    description = 'Generates both resource and data packs into the common resources.'
+    dependsOn('runData', 'runServerData')
+    from(layout.buildDirectory.dir('datagen/client')) { exclude '.cache/**' }
+    from(layout.buildDirectory.dir('datagen/server')) { exclude '.cache/**' }
+    into(project(':common').file('src/generated/resources'))
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 def loaderAttribute = Attribute.of('io.github.mcgradleconventions.loader', String)

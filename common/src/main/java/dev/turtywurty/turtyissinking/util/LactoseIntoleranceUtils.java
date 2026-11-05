@@ -38,11 +38,11 @@ public final class LactoseIntoleranceUtils {
 
         int timeLasts = level.getRandom().nextInt(24_000) + 24_000; // 1-2 days in ticks
         int amplifier = 0;
-        if (entity.hasEffect(ModMobEffects.LACTOSE_INTOLERANCE.get())) {
-            amplifier = entity.getEffect(ModMobEffects.LACTOSE_INTOLERANCE.get()).getAmplifier() + 1;
+        if (entity.hasEffect(ModMobEffects.LACTOSE_INTOLERANCE.holder())) {
+            amplifier = entity.getEffect(ModMobEffects.LACTOSE_INTOLERANCE.holder()).getAmplifier() + 1;
         }
 
-        entity.addEffect(new MobEffectInstance(ModMobEffects.LACTOSE_INTOLERANCE.get(), timeLasts, amplifier));
+        entity.addEffect(new MobEffectInstance(ModMobEffects.LACTOSE_INTOLERANCE.holder(), timeLasts, amplifier));
         Constants.LOG.info("Entity {} has lactose intolerance for {} ticks", entityUUID, timeLasts);
     }
 }

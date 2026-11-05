@@ -28,7 +28,7 @@ public class LactoseIntoleranceMobEffect extends MobEffect {
     public boolean applyEffectTick(@NonNull ServerLevel serverLevel, LivingEntity mob, int amplification) {
         mob.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 100, amplification + 2));
         mob.addEffect(new MobEffectInstance(MobEffects.HUNGER, 100, amplification));
-        mob.addEffect(new MobEffectInstance(ModMobEffects.FLATULENCE.get(), 100, amplification));
+        mob.addEffect(new MobEffectInstance(ModMobEffects.FLATULENCE.holder(), 100, amplification));
         return true;
     }
 }

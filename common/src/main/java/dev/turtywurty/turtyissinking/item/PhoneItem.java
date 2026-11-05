@@ -1,7 +1,8 @@
 package dev.turtywurty.turtyissinking.item;
 
 import dev.turtywurty.turtyissinking.network.ClientboundOpenPhoneScreenPacket;
-import dev.turtywurty.turtyissinking.platform.Services;
+import dev.turtywurty.turtymultiloader.network.NetworkService;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -16,8 +17,8 @@ public class PhoneItem extends Item {
 
     @Override
     public @NonNull InteractionResult use(Level level, @NonNull Player player, @NonNull InteractionHand hand) {
-        if (!level.isClientSide()) {
-            Services.NETWORK.sendToClient(player, ClientboundOpenPhoneScreenPacket.INSTANCE);
+        if (player instanceof ServerPlayer serverPlayer) {
+            NetworkService.get().sendToPlayer(serverPlayer, ClientboundOpenPhoneScreenPacket.INSTANCE);
             return InteractionResult.SUCCESS_SERVER;
         }
 

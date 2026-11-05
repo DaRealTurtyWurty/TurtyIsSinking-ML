@@ -4,6 +4,7 @@ import dev.turtywurty.turtyissinking.Constants;
 import dev.turtywurty.turtyissinking.advancement.criterion.GamemodeCriterion;
 import dev.turtywurty.turtyissinking.advancement.criterion.PunchBlockCriterion;
 import dev.turtywurty.turtyissinking.init.ModCriteria;
+import dev.turtywurty.turtymultiloader.datagen.convention.ConventionTags;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.predicates.BlockPredicate;
@@ -21,7 +22,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.common.Tags;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,7 +47,6 @@ public class TurtyIsSinkingAdvancementProvider extends AdvancementProvider {
             HolderGetter<Item> itemGetter = this.output.lookup(Registries.ITEM);
             HolderGetter<Block> blockGetter = this.output.lookup(Registries.BLOCK);
 
-
             Advancement.Builder.advancement()
                     .rootDisplay(
                             Items.MUSIC_DISC_CHIRP,
@@ -61,7 +60,7 @@ public class TurtyIsSinkingAdvancementProvider extends AdvancementProvider {
                     )
                     .addCriterion("has_music_disc",
                             InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item()
-                                    .of(itemGetter, Tags.Items.MUSIC_DISCS)
+                                    .of(itemGetter, ConventionTags.item("music_discs").key())
                                     .build()))
                     .addCriterion("is_creative", ModCriteria.GAMEMODE.get()
                             .createCriterion(new GamemodeCriterion.Conditions(Optional.empty(), GameType.CREATIVE)))

@@ -1,5 +1,8 @@
 {
   "values": [
-    "#c:drinks/milk"
+    {
+      "id": "#c:drinks/milk",
+      "required": false
+    }
   ]
 }

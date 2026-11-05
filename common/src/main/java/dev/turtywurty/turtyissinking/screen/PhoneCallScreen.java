@@ -64,7 +64,7 @@ public class PhoneCallScreen extends Screen {
     private static final int PHONE_TOP = 46;
     private static final int PHONE_RIGHT = 52;
     private static final int PHONE_BOTTOM = 52;
-
+    private final PhoneContact currentCaller;
     private int leftPos;
     private int topPos;
     private int scaledPhoneWidth;
@@ -73,8 +73,6 @@ public class PhoneCallScreen extends Screen {
     private int callerTop;
     private int scaledCallerWidth;
     private int scaledCallerHeight;
-
-    private final PhoneContact currentCaller;
 
     public PhoneCallScreen() {
         super(TITLE);

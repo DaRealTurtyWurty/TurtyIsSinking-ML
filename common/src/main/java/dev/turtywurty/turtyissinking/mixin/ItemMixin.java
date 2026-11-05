@@ -2,7 +2,6 @@ package dev.turtywurty.turtyissinking.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.turtywurty.turtyissinking.init.ModTags;
-import dev.turtywurty.turtyissinking.platform.Services;
 import dev.turtywurty.turtyissinking.util.AllergyUtils;
 import dev.turtywurty.turtyissinking.util.IPUtils;
 import dev.turtywurty.turtyissinking.util.LactoseIntoleranceUtils;
@@ -71,7 +70,7 @@ public class ItemMixin {
         if (!(level instanceof ServerLevel) || !(entity instanceof Player player))
             return;
 
-        if (!Services.PLATFORM.isAllergic(player, itemStack.getItem()))
+        if (!AllergyUtils.isAllergic(player, itemStack.getItem()))
             return;
 
         boolean hasAllergicReaction = AllergyUtils.hasAllergicReaction(level);

@@ -1,8 +1,9 @@
 package dev.turtywurty.turtyissinking.mixin;
 
 import dev.turtywurty.turtyissinking.network.ClientboundOpenAgeVerificationScreenPacket;
-import dev.turtywurty.turtyissinking.platform.Services;
 import dev.turtywurty.turtyissinking.util.PlayerAgeVerification;
+import dev.turtywurty.turtymultiloader.network.NetworkService;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import org.jspecify.annotations.Nullable;
@@ -29,6 +30,8 @@ public class AnimalMixin {
             return;
         }
 
-        Services.NETWORK.sendToClient(player, ClientboundOpenAgeVerificationScreenPacket.INSTANCE);
+        if (player instanceof ServerPlayer serverPlayer) {
+            NetworkService.get().sendToPlayer(serverPlayer, ClientboundOpenAgeVerificationScreenPacket.INSTANCE);
+        }
     }
 }

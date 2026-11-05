@@ -1,7 +1,7 @@
 package dev.turtywurty.turtyissinking.screen;
 
 import dev.turtywurty.turtyissinking.network.ServerboundAgeVerificationPacket;
-import dev.turtywurty.turtyissinking.platform.Services;
+import dev.turtywurty.turtymultiloader.network.NetworkService;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -25,7 +25,7 @@ public class AgeVerificationScreen extends Screen {
             this.minecraft.gui.setScreen(null);
             LocalPlayer player = Minecraft.getInstance().player;
             if (player != null) {
-                Services.NETWORK.sendToServer(new ServerboundAgeVerificationPacket(true));
+                NetworkService.get().sendToServer(new ServerboundAgeVerificationPacket(true));
             }
         }).bounds(this.width / 2 - 100, this.height / 2 - 20, 200, 20).build());
 
@@ -33,7 +33,7 @@ public class AgeVerificationScreen extends Screen {
             this.minecraft.gui.setScreen(null);
             LocalPlayer player = Minecraft.getInstance().player;
             if (player != null) {
-                Services.NETWORK.sendToServer(new ServerboundAgeVerificationPacket(false));
+                NetworkService.get().sendToServer(new ServerboundAgeVerificationPacket(false));
             }
         }).bounds(this.width / 2 - 100, this.height / 2 + 10, 200, 20).build());
     }

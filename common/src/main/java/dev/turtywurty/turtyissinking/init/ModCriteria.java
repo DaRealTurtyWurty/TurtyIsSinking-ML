@@ -1,15 +1,18 @@
 package dev.turtywurty.turtyissinking.init;
 
+import dev.turtywurty.turtyissinking.Constants;
 import dev.turtywurty.turtyissinking.advancement.criterion.GamemodeCriterion;
 import dev.turtywurty.turtyissinking.advancement.criterion.PunchBlockCriterion;
-import dev.turtywurty.turtyissinking.platform.Services;
-import dev.turtywurty.turtyissinking.platform.services.util.RegistryHandle;
+import dev.turtywurty.turtymultiloader.registration.RegistrationHandle;
+import dev.turtywurty.turtymultiloader.registration.RegistryService;
+import net.minecraft.advancements.triggers.CriterionTrigger;
+import net.minecraft.core.registries.Registries;
 
 public final class ModCriteria {
-    public static final RegistryHandle<GamemodeCriterion> GAMEMODE = Services.REGISTRY.registerCriteriaTrigger("gamemode",
+    public static final RegistrationHandle<CriterionTrigger<?>, GamemodeCriterion> GAMEMODE = RegistryService.get().register(Registries.TRIGGER_TYPE, Constants.id("gamemode"),
             GamemodeCriterion::new);
 
-    public static final RegistryHandle<PunchBlockCriterion> PUNCH_BLOCK = Services.REGISTRY.registerCriteriaTrigger("punch_block",
+    public static final RegistrationHandle<CriterionTrigger<?>, PunchBlockCriterion> PUNCH_BLOCK = RegistryService.get().register(Registries.TRIGGER_TYPE, Constants.id("punch_block"),
             PunchBlockCriterion::new);
 
     public static void load() {

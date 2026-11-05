@@ -19,11 +19,13 @@ public final class IPUtils {
     };
 
     private static final String GEO_LOCATE_API = "http://ip-api.com/line/%s?fields=countryCode";
-
-    private static volatile String cachedExternalIP;
-    private static volatile long lastExternalIPValidation;
     private static final Map<String, String> cachedCountryCodes = new HashMap<>();
     private static final Map<String, Long> lastCountryCodeValidations = new HashMap<>();
+    private static volatile String cachedExternalIP;
+    private static volatile long lastExternalIPValidation;
+
+    private IPUtils() {
+    }
 
     public static String getExternalIP() {
         long currentTime = System.currentTimeMillis();
@@ -117,8 +119,5 @@ public final class IPUtils {
             return getCountryCode(externalIP);
 
         return null;
-    }
-
-    private IPUtils() {
     }
 }

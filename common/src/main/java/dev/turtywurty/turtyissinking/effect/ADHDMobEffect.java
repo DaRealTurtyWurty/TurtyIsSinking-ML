@@ -40,6 +40,24 @@ public class ADHDMobEffect extends MobEffect {
         super(category, color, particleOptions);
     }
 
+    private static void syncLook(LivingEntity mob) {
+        if (mob instanceof ServerPlayer player) {
+            player.connection.teleport(
+                    player.getX(),
+                    player.getY(),
+                    player.getZ(),
+                    player.getYRot(),
+                    player.getXRot()
+            );
+        }
+    }
+
+    private static void syncMovement(LivingEntity mob) {
+        if (mob instanceof ServerPlayer player) {
+            player.connection.send(new ClientboundSetEntityMotionPacket(player));
+        }
+    }
+
     @Override
     public boolean shouldApplyEffectTickThisTick(int tickCount, int amplification) {
         return this.random.nextInt(Math.max(1, (10 * 20) / (amplification + 1))) == 0;
@@ -94,18 +112,6 @@ public class ADHDMobEffect extends MobEffect {
         return true;
     }
 
-    private static void syncLook(LivingEntity mob) {
-        if (mob instanceof ServerPlayer player) {
-            player.connection.teleport(
-                    player.getX(),
-                    player.getY(),
-                    player.getZ(),
-                    player.getYRot(),
-                    player.getXRot()
-            );
-        }
-    }
-
     private boolean handleJump(LivingEntity mob) {
         if (mob.onGround()) {
             mob.jumpFromGround();
@@ -114,12 +120,6 @@ public class ADHDMobEffect extends MobEffect {
         }
 
         return false;
-    }
-
-    private static void syncMovement(LivingEntity mob) {
-        if (mob instanceof ServerPlayer player) {
-            player.connection.send(new ClientboundSetEntityMotionPacket(player));
-        }
     }
 
     private boolean handleCrouch(LivingEntity mob) {

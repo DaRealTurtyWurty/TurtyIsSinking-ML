@@ -4,3 +4,13 @@ plugins {
     // see https://projects.neoforged.net/neoforged/moddevgradle for new versions
     id 'net.neoforged.moddev' version '2.0.148' apply false
 }
+
+subprojects {
+    repositories {
+        maven {
+            name = 'TurtyMultiloader'
+            url = rootProject.uri(turtymultiloader_repository)
+            content { includeGroup('dev.turtywurty.turtymultiloader') }
+        }
+    }
+}

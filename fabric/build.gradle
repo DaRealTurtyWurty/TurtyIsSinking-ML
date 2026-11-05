@@ -3,6 +3,8 @@ plugins {
     id 'net.fabricmc.fabric-loom'
 }
 dependencies {
+    implementation("dev.turtywurty.turtymultiloader:turtymultiloader-fabric:${turtymultiloader_version}")
+    include("dev.turtywurty.turtymultiloader:turtymultiloader-fabric:${turtymultiloader_version}")
     minecraft("com.mojang:minecraft:${minecraft_version}")
     implementation("net.fabricmc:fabric-loader:${fabric_loader_version}")
     implementation("net.fabricmc.fabric-api:fabric-api:${fabric_version}")
@@ -14,6 +16,13 @@ loom {
         accessWidenerPath.set(aw)
     }
     runs {
+        dataGeneration {
+            client()
+            runDir('runs/datagen')
+            property('fabric-api.datagen', 'true')
+            property('fabric-api.datagen.modid', mod_id)
+            property('fabric-api.datagen.output-dir', project(':common').file('src/generated/resources').absolutePath)
+        }
         client {
             client()
             setConfigName('Fabric Client')
@@ -39,7 +48,7 @@ def loaderAttribute = Attribute.of('io.github.mcgradleconventions.loader', Strin
     }
 }
 sourceSets.configureEach {
-    [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant->
+    [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant ->
         configurations.named(variant) {
             attributes {
                 attribute(loaderAttribute, 'fabric')

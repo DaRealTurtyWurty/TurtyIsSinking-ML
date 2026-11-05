@@ -8,15 +8,6 @@ import java.util.regex.Pattern;
 
 public class Uwuifier {
     public static final Uwuifier DEFAULT = new Uwuifier();
-
-    private static final Pattern EXCLAMATION_PATTERN = Pattern.compile("[?!]+$");
-    private static final Pattern URI_ILLEGAL_CHARACTER_PATTERN = Pattern.compile("[^a-z0-9:/?#\\[\\]@!$&'()*+,;=.\\-_~%]", Pattern.CASE_INSENSITIVE);
-    private static final Pattern URI_BAD_ESCAPE_PATTERN = Pattern.compile("%[^0-9a-f]|%[0-9a-f](?:[^0-9a-f]|$)", Pattern.CASE_INSENSITIVE);
-    private static final Pattern URI_PATTERN = Pattern.compile("(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*)(?:\\?([^#]*))?(?:#(.*))?");
-    private static final Pattern SCHEME_PATTERN = Pattern.compile("^[a-z][a-z0-9+\\-.]*$");
-    private static final Pattern LETTER_PATTERN = Pattern.compile("^[a-zA-Z]$");
-    private static final Pattern SENTENCE_END_PATTERN = Pattern.compile("[.!?\\-]");
-
     public static final List<String> FACES = Arrays.asList(
             "(・`ω´・)",
             ";;w;;",
@@ -29,9 +20,7 @@ public class Uwuifier {
             ":3",
             "x3"
     );
-
     public static final List<String> EXCLAMATIONS = Arrays.asList("!?", "?!!", "?!?1", "!!11", "?!?!");
-
     public static final List<String> ACTIONS = Arrays.asList(
             "*blushes*",
             "*whispers to self*",
@@ -49,7 +38,13 @@ public class Uwuifier {
             "*huggles tightly*",
             "*boops your nose*"
     );
-
+    private static final Pattern EXCLAMATION_PATTERN = Pattern.compile("[?!]+$");
+    private static final Pattern URI_ILLEGAL_CHARACTER_PATTERN = Pattern.compile("[^a-z0-9:/?#\\[\\]@!$&'()*+,;=.\\-_~%]", Pattern.CASE_INSENSITIVE);
+    private static final Pattern URI_BAD_ESCAPE_PATTERN = Pattern.compile("%[^0-9a-f]|%[0-9a-f](?:[^0-9a-f]|$)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern URI_PATTERN = Pattern.compile("(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*)(?:\\?([^#]*))?(?:#(.*))?");
+    private static final Pattern SCHEME_PATTERN = Pattern.compile("^[a-z][a-z0-9+\\-.]*$");
+    private static final Pattern LETTER_PATTERN = Pattern.compile("^[a-zA-Z]$");
+    private static final Pattern SENTENCE_END_PATTERN = Pattern.compile("[.!?\\-]");
     private final SpacesModifier spacesModifier;
     private final double wordsModifier;
     private final double exclamationsModifier;
@@ -65,6 +60,75 @@ public class Uwuifier {
         validateModifier(exclamationsModifier, "exclamations");
         this.wordsModifier = wordsModifier;
         this.exclamationsModifier = exclamationsModifier;
+    }
+
+    private static String checkCapital(String[] words, int index, String word, char firstCharacter) {
+        if (firstCharacter != Character.toUpperCase(firstCharacter))
+            return word;
+
+        if (getCapitalPercentage(word) > 0.5)
+            return word;
+
+        if (index == 0)
+            return Character.toLowerCase(firstCharacter) + word.substring(1);
+
+        String previousWord = words[index - 1];
+        char previousWordLastChar = previousWord.charAt(previousWord.length() - 1);
+        if (!SENTENCE_END_PATTERN.matcher(String.valueOf(previousWordLastChar)).find())
+            return word;
+
+        return Character.toLowerCase(firstCharacter) + word.substring(1);
+    }
+
+    private static double getCapitalPercentage(String input) {
+        int totalLetters = 0;
+        int upperLetters = 0;
+
+        for (int i = 0; i < input.length(); i++) {
+            String currentLetter = String.valueOf(input.charAt(i));
+            if (LETTER_PATTERN.matcher(currentLetter).matches()) {
+                totalLetters++;
+                if (currentLetter.equals(currentLetter.toUpperCase())) {
+                    upperLetters++;
+                }
+            }
+        }
+
+        return totalLetters == 0 ? 0 : (double) upperLetters / totalLetters;
+    }
+
+    private static boolean isUri(String value) {
+        if (value == null || value.isBlank())
+            return false;
+
+        if (URI_ILLEGAL_CHARACTER_PATTERN.matcher(value).find())
+            return false;
+
+        if (URI_BAD_ESCAPE_PATTERN.matcher(value).find())
+            return false;
+
+        Matcher split = URI_PATTERN.matcher(value);
+        if (!split.matches())
+            return false;
+
+        String scheme = split.group(1);
+        String authority = split.group(2);
+        String path = split.group(3);
+        if (scheme == null || scheme.isEmpty() || path == null)
+            return false;
+
+        if (authority != null && !authority.isEmpty()) {
+            if (!(path.isEmpty() || path.startsWith("/")))
+                return false;
+        } else if (path.startsWith("//"))
+            return false;
+
+        return SCHEME_PATTERN.matcher(scheme.toLowerCase(Locale.ROOT)).matches();
+    }
+
+    private static void validateModifier(double modifier, String name) {
+        if (modifier < 0 || modifier > 1)
+            throw new IllegalArgumentException(name + " must be between 0 and 1");
     }
 
     public String uwuify(String input) {
@@ -145,80 +209,11 @@ public class Uwuifier {
         return String.join(" ", words);
     }
 
-    private static String checkCapital(String[] words, int index, String word, char firstCharacter) {
-        if (firstCharacter != Character.toUpperCase(firstCharacter))
-            return word;
-
-        if (getCapitalPercentage(word) > 0.5)
-            return word;
-
-        if (index == 0)
-            return Character.toLowerCase(firstCharacter) + word.substring(1);
-
-        String previousWord = words[index - 1];
-        char previousWordLastChar = previousWord.charAt(previousWord.length() - 1);
-        if (!SENTENCE_END_PATTERN.matcher(String.valueOf(previousWordLastChar)).find())
-            return word;
-
-        return Character.toLowerCase(firstCharacter) + word.substring(1);
-    }
-
-    private static double getCapitalPercentage(String input) {
-        int totalLetters = 0;
-        int upperLetters = 0;
-
-        for (int i = 0; i < input.length(); i++) {
-            String currentLetter = String.valueOf(input.charAt(i));
-            if (LETTER_PATTERN.matcher(currentLetter).matches()) {
-                totalLetters++;
-                if (currentLetter.equals(currentLetter.toUpperCase())) {
-                    upperLetters++;
-                }
-            }
-        }
-
-        return totalLetters == 0 ? 0 : (double) upperLetters / totalLetters;
-    }
-
     private String replaceIfAllowed(UwuSeed seed, String word, String regex, String replacement) {
         if (seed.random() > this.wordsModifier)
             return word;
 
         return word.replaceAll(regex, replacement);
-    }
-
-    private static boolean isUri(String value) {
-        if (value == null || value.isBlank())
-            return false;
-
-        if (URI_ILLEGAL_CHARACTER_PATTERN.matcher(value).find())
-            return false;
-
-        if (URI_BAD_ESCAPE_PATTERN.matcher(value).find())
-            return false;
-
-        Matcher split = URI_PATTERN.matcher(value);
-        if (!split.matches())
-            return false;
-
-        String scheme = split.group(1);
-        String authority = split.group(2);
-        String path = split.group(3);
-        if (scheme == null || scheme.isEmpty() || path == null)
-            return false;
-
-        if (authority != null && !authority.isEmpty()) {
-            if (!(path.isEmpty() || path.startsWith("/")))
-                return false;
-        } else if (path.startsWith("//"))
-            return false;
-
-        return SCHEME_PATTERN.matcher(scheme.toLowerCase(Locale.ROOT)).matches();
-    }
-
-    private static void validateModifier(double modifier, String name) {
-        if (modifier < 0 || modifier > 1)
-            throw new IllegalArgumentException(name + " must be between 0 and 1");
     }
 
     public record SpacesModifier(double faces, double actions, double stutters) {
